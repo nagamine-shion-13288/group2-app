@@ -65,8 +65,7 @@
                         </p>
                     </div>
                     <div class="cart-item__actions">
-                        <form action="{{ route('cart.destroy', $item['itemId']) }}" method="POST">
-                              onsubmit="return confirm('この商品をカートから削除しますか？')">
+                        <form action="{{ route('cart.destroy', $item['itemId']) }}" method="POST" onsubmit="return confirm('この商品をカートから削除しますか？')">
                             @csrf
                             <button type="submit" class="btn-delete">削除</button>
                         </form>
