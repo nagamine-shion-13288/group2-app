@@ -11,10 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (Schema::hasTable('carts')) {
-        return; // すでに存在する場合はスキップ
-        }
-        
         Schema::create('carts', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
