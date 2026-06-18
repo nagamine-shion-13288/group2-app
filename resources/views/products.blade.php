@@ -117,6 +117,7 @@
 
         <h1 class="site-title">ショッピングサイト</h1>
         <div class="cart-link">カート</div>
+        <a href="{{ url('/cart') }}" class="cart-link" style="color: inherit;">カート</a>
     </div>
 
     <div class="filter-form">
