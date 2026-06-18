@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use App\Models\User;
+use App\Models\Account;
 
 class CartController extends Controller
 {
@@ -19,16 +19,16 @@ class CartController extends Controller
     {
         $userId = 1; // テスト用固定ID、認証実装後に Auth::id() に変更
 
-        $user = User::find($userId);
+        $user = Account::find($userId);
 
-        $cartItems = Cart::with('product')
+        $cartItems = Cart::with(['product', 'product.images'])
             ->where('user_id', $userId)
             ->get()
             ->map(function ($cart) {
                 return [
                     'itemId'    => $cart->product->id,
                     'userId'    => $cart->user_id,
-                    'pictureId' => $cart->product->picture_id ?? null,
+                    'pictureId' => $cart->product->images->first()->url ?? null,
                     'itemName'  => $cart->product->name,
                     'itemPrice' => $cart->product->price,
                     'quantity'  => $cart->quantity,

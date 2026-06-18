@@ -4,37 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+use App\Models\Account;
+use App\Models\Product;
 
 class Cart extends Model
 {
-    /**
-     * 複合主キーのため incrementing を無効化
-     */
+
+    //カートにタイムスタンプ機能は実装してないので無効化
+    public $timestamps = false;
+
     public $incrementing = false;
 
-    /**
-     * 一括代入可能なカラム
-     */
     protected $fillable = [
         'user_id',
         'product_id',
         'quantity',
     ];
 
-    /**
-     * ユーザーとのリレーション
-     */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Account::class);
     }
 
     /**
-     * 商品とのリレーション（仮）
+     * 商品とのリレーション
      */
     public function product(): BelongsTo
     {
-        return $this->belongsTo('App\Models\Product');
+        return $this->belongsTo(Product::class);
     }
 }

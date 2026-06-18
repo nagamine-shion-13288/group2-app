@@ -52,7 +52,7 @@
                 <div class="cart-item">
                     <div class="cart-item__image">
                         @if ($item['pictureId'])
-                            <img src="{{ asset('storage/products/' . $item['pictureId'] . '.jpg') }}" alt="{{ $item['itemName'] }}">
+                            <img src="{{ asset($item['pictureId']) }}" alt="{{ $item['itemName'] }}">
                         @else
                             <div class="cart-item__image--placeholder">画像</div>
                         @endif
@@ -65,8 +65,7 @@
                         </p>
                     </div>
                     <div class="cart-item__actions">
-                        <form action="{{ route('cart.destroy', $item['itemId']) }}" method="POST">
-                              onsubmit="return confirm('この商品をカートから削除しますか？')">
+                        <form action="{{ route('cart.destroy', $item['itemId']) }}" method="POST" onsubmit="return confirm('この商品をカートから削除しますか？')">
                             @csrf
                             <button type="submit" class="btn-delete">削除</button>
                         </form>

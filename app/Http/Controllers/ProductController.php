@@ -26,4 +26,12 @@ class ProductController extends Controller
         return view('products', compact('products', 'categories', 'selectedCategoryId'));
     } 
 
+
+    public function show(int $id) {
+        // 画像リレーション（images）を一緒に読み込みつつ、IDで1件取得
+        $product = Product::with('images')->findOrFail($id);
+
+        return view('products.products_show', compact('product'));
+}
+
 }
