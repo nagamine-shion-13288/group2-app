@@ -8,6 +8,10 @@ use App\Models\Product;
 
 class Cart extends Model
 {
+
+    //カートにタイムスタンプ機能は実装してないので無効化
+    public $timestamps = false;
+
     public $incrementing = false;
 
     protected $fillable = [
