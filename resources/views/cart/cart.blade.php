@@ -32,19 +32,25 @@
         .cart-total__price { text-decoration: underline; font-weight: bold; }
         .btn-primary { display: inline-block; background: #333; color: #fff; padding: 8px 20px; border-radius: 4px; text-decoration: none; font-size: 14px; }
         .btn-primary:hover { background: #555; }
+
+        .btn-back { display: inline-block; font-size: 13px; color: #555; text-decoration: none; margin-bottom: 12px; }
+        .btn-back:hover { color: #000; }
     </style>
 </head>
 <body>
 <div class="cart-container">
 
     <p class="cart-user">{{ $user->name ?? 'ゲスト' }}さん</p>
+    <a href="javascript:history.back()" class="btn-back">戻る</a>
     <h1 class="cart-title">カート</h1>
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    @if ($cartItems->isEmpty())
+    @if (!$user)
+        <p class="cart-empty">ログインするとカートをご利用いただけます。</p>
+    @elseif ($cartItems->isEmpty())
         <p class="cart-empty">カートに商品がありません。</p>
     @else
         <div class="cart-items">
@@ -65,7 +71,8 @@
                         </p>
                     </div>
                     <div class="cart-item__actions">
-                        <form action="{{ route('cart.destroy', $item['itemId']) }}" method="POST" onsubmit="return confirm('この商品をカートから削除しますか？')">
+                        <form action="{{ route('cart.destroy', $item['itemId']) }}" method="POST"
+                              onsubmit="return confirm('この商品をカートから削除しますか？')">
                             @csrf
                             <button type="submit" class="btn-delete">削除</button>
                         </form>
@@ -78,7 +85,7 @@
             <p class="cart-total">
                 合計金額　<span class="cart-total__price">¥{{ number_format($totalPrice) }}</span>
             </p>
-            <!-- /cart/checkを追加 -->
+            <!-- TODO: /cart/checkを追加 -->
             <a href="#" class="btn-primary">購入確認へ</a>
         </div>
     @endif
