@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Cart extends Model
 {
+    //カートにタイムスタンプ機能は実装してないので無効化
+    public $timestamps = false;
     /**
      * 複合主キーのため incrementing を無効化
      */
