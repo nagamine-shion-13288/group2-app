@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $product->name }} - 商品詳細</title>
+    <link rel="icon" type="image/png" href="{{ asset('D.png?v=1') }}">
     <style>
         body { font-family: sans-serif; margin: 0; padding: 0; }
         .container {
