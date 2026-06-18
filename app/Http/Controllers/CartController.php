@@ -17,7 +17,7 @@ class CartController extends Controller
      */
     public function index(): View
     {
-        $userId = session('account_id');
+        $userId = session('userId');
 
         $user = Account::find($userId);
 
@@ -47,7 +47,7 @@ class CartController extends Controller
      */
     public function store(Request $request, int $id): RedirectResponse
     {
-    $userId = session('account_id');
+    $userId = session('userId');
     $quantity = $request->integer('quantity', 1);
 
     $cart = Cart::where('user_id', $userId)
@@ -76,7 +76,7 @@ class CartController extends Controller
      */
     public function destroy(int $id): RedirectResponse
     {
-        $userId = session('account_id');
+        $userId = session('userId');
 
         Cart::where('user_id', $userId)
             ->where('product_id', $id)
