@@ -6,6 +6,7 @@
     <title>新規アカウント登録</title>
 
     <link rel="stylesheet" href="{{ asset('css/accountAdd.css') }}">
+    <link rel="icon" type="image/png" href="{{ asset('D.png?v=1') }}">
 </head>
 <body>
 

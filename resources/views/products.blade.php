@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ショッピングサイト</title>
+    <link rel="icon" type="image/png" href="{{ asset('D.png?v=1') }}">
     <style>
         /* 全体の文字の配置や余白を整える設定 */
         body {
