@@ -55,7 +55,9 @@ class CartController extends Controller
                 ->first();
 
     if ($cart) {
-        $cart->increment('quantity', $quantity);
+        Cart::where('user_id', $userId)
+            ->where('product_id', $id)
+            ->update(['quantity' => $cart->quantity + $quantity]);
     } else {
         Cart::create([
             'user_id'    => $userId,
