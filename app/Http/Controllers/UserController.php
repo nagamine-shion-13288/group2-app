@@ -68,7 +68,7 @@ class UserController extends Controller
         'userName' => $account->name,
     ]);
 
-            return redirect('/');
+            return redirect('/products');
         }
 
         return back()->withErrors([
