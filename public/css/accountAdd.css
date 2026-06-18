@@ -1,0 +1,103 @@
+* {
+  box-sizing: border-box;
+  }
+
+body {
+margin: 0;
+min-height: 100vh;
+background: #f4f1ea;
+font-family: sans-serif;
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+.container {
+width: 100%;
+max-width: 420px;
+padding: 20px;
+}
+
+.card {
+background: #ffffff;
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 32px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.brand {
+text-align: center;
+margin-bottom: 24px;
+}
+
+.brand h1 {
+margin: 0 0 8px;
+color: #1f3a5c;
+}
+
+.brand p {
+margin: 0;
+color: #666;
+font-size: 14px;
+}
+
+.error-box {
+background: #ffeaea;
+color: #c0392b;
+padding: 10px;
+border-radius: 4px;
+margin-bottom: 16px;
+}
+
+.field {
+margin-bottom: 16px;
+}
+
+.field label {
+display: block;
+margin-bottom: 6px;
+font-weight: bold;
+}
+
+.field input {
+width: 100%;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 4px;
+}
+
+.field input:focus {
+outline: none;
+border-color: #1f3a5c;
+}
+
+.btn-register {
+width: 100%;
+padding: 12px;
+background: #1f3a5c;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-size: 15px;
+}
+
+.btn-register:hover {
+background: #142a45;
+}
+
+.link-area {
+text-align: center;
+margin-top: 16px;
+}
+
+.link-area a {
+color: #1f3a5c;
+text-decoration: none;
+}
+
+.link-area a:hover {
+text-decoration: underline;
+}
