@@ -15,6 +15,8 @@ class Cart extends Model
 
     public $incrementing = false;
 
+    protected $primaryKey = null;
+    
     protected $fillable = [
         'user_id',
         'product_id',

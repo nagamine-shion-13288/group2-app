@@ -17,7 +17,7 @@ class CartController extends Controller
      */
     public function index(): View
     {
-        $userId = 1; // テスト用固定ID、認証実装後に Auth::id() に変更
+        $userId = session('account_id');
 
         $user = Account::find($userId);
 
@@ -47,7 +47,7 @@ class CartController extends Controller
      */
     public function store(Request $request, int $id): RedirectResponse
     {
-    $userId   = 1; // テスト用固定ID
+    $userId = session('account_id');
     $quantity = $request->integer('quantity', 1);
 
     $cart = Cart::where('user_id', $userId)
@@ -55,7 +55,9 @@ class CartController extends Controller
                 ->first();
 
     if ($cart) {
-        $cart->increment('quantity', $quantity);
+        Cart::where('user_id', $userId)
+            ->where('product_id', $id)
+            ->update(['quantity' => $cart->quantity + $quantity]);
     } else {
         Cart::create([
             'user_id'    => $userId,
@@ -74,7 +76,7 @@ class CartController extends Controller
      */
     public function destroy(int $id): RedirectResponse
     {
-        $userId = 1; // テスト用固定ID
+        $userId = session('account_id');
 
         Cart::where('user_id', $userId)
             ->where('product_id', $id)
