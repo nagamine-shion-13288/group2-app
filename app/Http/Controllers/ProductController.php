@@ -9,6 +9,7 @@ use App\Models\Category;
 
 class ProductController extends Controller 
 { 
+    // 商品一覧画面用（これまでの処理）
     public function products(Request $request) { 
         
         $selectedCategoryId = $request->input('category_id');
@@ -16,7 +17,7 @@ class ProductController extends Controller
         if ($selectedCategoryId) {
             $products = Product::with('images')->where('category_id', $selectedCategoryId)->get();
         } else {
-
+            // ★ここを「all()」から「get()」に変更します
             $products = Product::with('images')->get();
         }
 
@@ -24,4 +25,5 @@ class ProductController extends Controller
 
         return view('products', compact('products', 'categories', 'selectedCategoryId'));
     } 
+
 }

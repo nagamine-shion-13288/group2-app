@@ -114,7 +114,7 @@
 <body>
 
     <div class="header-container">
-        <div class="user-info">〇〇さん</div>
+
         <h1 class="site-title">ショッピングサイト</h1>
         <div class="cart-link">カート</div>
     </div>
@@ -137,16 +137,22 @@
         @foreach($products as $product)
             <li class="product-item">
                 
-                <div class="image-box">
-                    @if($product->images->isNotEmpty() && $product->images->first()->url)
-                        <img src="{{ $product->images->first()->url }}" alt="{{ $product->images->first()->alt ?? $product->name }}">
-                    @else
-                        <span class="not-found-text">画像<br>NotFound</span>
-                    @endif
-                </div>
+                <a href="{{ url('/products/' . $product->id) }}" style="text-decoration: none; color: inherit;">
+                    <div class="image-box">
+                        @if($product->images->isNotEmpty() && $product->images->first()->url)
+                            <img src="{{ $product->images->first()->url }}" alt="{{ $product->images->first()->alt ?? $product->name }}">
+                        @else
+                            <span class="not-found-text">画像<br>NotFound</span>
+                        @endif
+                    </div>
+                </a>
 
                 <div class="product-info">
-                    <div class="product-name">{{ $product->name }}</div>
+                    <div class="product-name">
+                        <a href="{{ url('/products/' . $product->id) }}" style="text-decoration: none; color: inherit;">
+                            {{ $product->name }}
+                        </a>
+                    </div>
                     <div class="product-price">¥ {{ number_format($product->price) }}</div>
                 </div>
 
