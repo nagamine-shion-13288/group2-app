@@ -21,14 +21,14 @@ class CartController extends Controller
 
         $user = User::find($userId);
 
-        $cartItems = Cart::with('product')
+        $cartItems = Cart::with(['product', 'product.images'])
             ->where('user_id', $userId)
             ->get()
             ->map(function ($cart) {
                 return [
                     'itemId'    => $cart->product->id,
                     'userId'    => $cart->user_id,
-                    'pictureId' => $cart->product->picture_id ?? null,
+                    'pictureId' => $cart->product->images->first()->url ?? null,
                     'itemName'  => $cart->product->name,
                     'itemPrice' => $cart->product->price,
                     'quantity'  => $cart->quantity,

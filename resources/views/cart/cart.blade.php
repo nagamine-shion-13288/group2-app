@@ -52,7 +52,7 @@
                 <div class="cart-item">
                     <div class="cart-item__image">
                         @if ($item['pictureId'])
-                            <img src="{{ asset('storage/products/' . $item['pictureId'] . '.jpg') }}" alt="{{ $item['itemName'] }}">
+                            <img src="{{ asset($item['pictureId']) }}" alt="{{ $item['itemName'] }}">
                         @else
                             <div class="cart-item__image--placeholder">画像</div>
                         @endif
