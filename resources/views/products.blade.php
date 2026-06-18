@@ -14,13 +14,14 @@
             background-color: #fff;
         }
 
-        /* ヘッダー部分（タイトル、〇〇さん、カート）の横並び設定 */
+       /* ヘッダー部分（タイトル、カート）の配置設定 */
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
             margin-bottom: 40px;
             padding-bottom: 10px;
+            position: relative; /* ★基準位置を設定するために追加 */
         }
 
         .user-info {
@@ -33,16 +34,18 @@
             font-weight: bold;
             text-align: center;
             text-decoration: underline;
-            width: 60%;
-            margin: 0;
+            margin: 0 auto; /* ★左右の余白を自動調整して中央へ */
+            /* width: 60%; ➔ 不要になったので削除するかコメントアウト */
         }
 
         .cart-link {
             font-size: 24px;
             text-align: right;
             text-decoration: underline;
-            width: 20%;
             cursor: pointer;
+            position: absolute; /* ★カートのボタンを右端に固定するために追加 */
+            right: 0;           /* ★右端ぴったりに配置 */
+            bottom: 10px;       /* ★下からの位置をヘッダーに合わせる */
         }
 
         /* カテゴリー選択フォームの配置 */
