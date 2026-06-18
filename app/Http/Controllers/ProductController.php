@@ -16,7 +16,7 @@ class ProductController extends Controller
         if ($selectedCategoryId) {
             $products = Product::with('images')->where('category_id', $selectedCategoryId)->get();
         } else {
-            // ★ここを「all()」から「get()」に変更します
+
             $products = Product::with('images')->get();
         }
 
