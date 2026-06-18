@@ -50,15 +50,18 @@
         <a href="/products">&lt; 商品一覧に戻る</a>
     </div>
 
-    <div class="product-detail">
+   <div class="product-detail">
         <div class="product-image">
-            @if ($product->images && $product->images->first())
-                <img src="{{ asset('storage/products/' . $product->images->first()->url . '.jpg') }}" alt="{{ $product->name }}">
-            @else
-                <div class="product-image--placeholder">画像</div>
-            @endif
-        </div>
-
+        @if ($product->images && $product->images->isNotEmpty() && $product->images->first()->url)
+            <img src="{{ $product->images->first()->url }}" alt="{{ $product->name }}">
+        @else
+            <div class="product-image--placeholder">画像</div>
+        @endif
+    </div>
+        
+        <div class="product-info">
+            </div>
+    </div>
         <div class="product-info">
             <h1 class="product-name">{{ $product->name }}</h1>
             <p class="product-price">¥{{ number_format($product->price) }}</p>
