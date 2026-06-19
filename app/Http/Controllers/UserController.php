@@ -86,4 +86,72 @@ class UserController extends Controller
 
         return redirect('/login');
     }
+
+    // アカウント管理画面を表示
+    public function showAccount()
+    {
+        $userId = session('userId');
+
+        if (!$userId) {
+            return redirect('/login')
+                ->with('error', 'ログインしてください。');
+        }
+
+        $account = Account::find($userId);
+
+        return view('account.account', compact('account'));
+    }
+
+    // アカウント更新画面を表示
+    public function showAccountUpdateForm()
+    {
+        $userId = session('userId');
+
+        if (!$userId) {
+            return redirect('/login')
+                ->with('error', 'ログインしてください。');
+        }
+
+        $account = Account::find($userId);
+
+        return view('account.accountupdate', compact('account'));
+    }
+
+    // アカウント情報更新処理
+    public function accountUpdate(Request $request)
+    {
+        $userId = session('userId');
+
+        if (!$userId) {
+            return redirect('/login')
+                ->with('error', 'ログインしてください。');
+        }
+
+        $request->validate([
+            'name'     => 'required',
+            'address'  => 'required',
+            'phone'    => 'required',
+            'password' => 'required',
+        ], [
+            'name.required'     => '氏名を入力してください。',
+            'address.required'  => '住所を入力してください。',
+            'phone.required'    => '電話番号を入力してください。',
+            'password.required' => 'パスワードを入力してください。',
+        ]);
+
+        $account = Account::find($userId);
+
+        $account->name          = $request->name;
+        $account->address       = $request->address;
+        $account->user_phone    = $request->phone;
+        $account->password_hash = Hash::make($request->password);
+
+        $account->save();
+
+        // セッションの表示名も更新
+        session(['userName' => $account->name]);
+
+        return redirect('/account')
+            ->with('success', 'アカウント情報を更新しました。');
+    }
 }
