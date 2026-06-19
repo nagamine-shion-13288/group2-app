@@ -169,7 +169,6 @@
             margin-bottom: 8px;
             height: 44px; /* 2行分先を確保して高さを統一 */
             display: -webkit-box;
-            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
