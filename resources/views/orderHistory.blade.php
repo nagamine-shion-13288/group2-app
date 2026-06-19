@@ -34,8 +34,7 @@
 </head>
 <body>
 
-@include('header')
-
+@include('layouts.header')
 <div class="history-container">
 
     <a href="javascript:history.back()" class="btn-back">戻る</a>
