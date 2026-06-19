@@ -87,7 +87,7 @@
                 合計金額　<span class="cart-total__price">¥{{ number_format($totalPrice) }}</span>
             </p>
             <!-- TODO: /cart/checkを追加 -->
-            <a href="#" class="btn-primary">購入確認へ</a>
+            <a href="{{ route('cart.check') }}" class="btn-primary">購入確認へ</a>
         </div>
     @endif
 
