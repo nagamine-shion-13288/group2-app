@@ -29,3 +29,4 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/cart/check', [OrderController::class, 'confirm'])->name('cart.check');
 Route::post('/complete', [OrderController::class, 'complete'])->name('order.complete');
 
+Route::get('/orderhistory', [OrderController::class, 'history'])->name('order.history');

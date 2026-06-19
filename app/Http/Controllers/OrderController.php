@@ -85,4 +85,39 @@ class OrderController extends Controller
             'userName' => $userName,
         ]);
     }
+
+    // 注文履歴画面を表示
+    public function history()
+    {
+        $userId   = session('userId');
+        $userName = session('userName');
+
+        // 未ログインの場合はログイン画面へ
+        if (!$userId) {
+            return redirect('/login');
+        }
+
+        // ログインユーザーの注文履歴を取得
+        $orderHistories = DB::table('orders')
+            ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->join('products', 'order_details.product_id', '=', 'products.id')
+            ->leftJoin('products_img', 'products.id', '=', 'products_img.product_id')
+            ->where('orders.user_id', $userId)
+            ->select(
+                'products_img.url as pictureUrl',   // 商品画像
+                'products.name as itemName',       // 商品名
+                'order_details.quantity',          // 個数
+                'order_details.price as itemPrice',// 値段（購入時の単価）
+                'orders.shipping_address',         // お届け先
+                'orders.created_at as orderDate'   // 購入日
+            )
+            // 最新の購入履歴が一番上に来るように並び替え
+            ->orderBy('orders.created_at', 'desc') 
+            ->get();
+
+        return view('orderHistory', [
+            'userName'       => $userName,
+            'orderHistories' => $orderHistories,
+        ]);
+    }
 }
