@@ -53,6 +53,11 @@
             <input type="text" name="address" value="{{ old('address') }}">
         </div>
 
+        <div class="">
+            <label>電話番号</label>
+            <input type="text" name="user_phone" value="{{ old('user_phone') }}">
+        </div>
+
         <button type="submit" class="btn-register">
             登録
         </button>
