@@ -39,12 +39,8 @@
     </style>
 </head>
 <body>
+@include('layouts.header')
 <div class="cart-container">
-
-    <p class="cart-user">{{ $user->name ?? 'ゲスト' }}さん</p>
-    <a href="javascript:history.back()" class="btn-back">戻る</a>
-    <h1 class="cart-title">カート</h1>
-
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif

@@ -23,6 +23,7 @@ class UserController extends Controller
     'password' => 'required|confirmed',
     'name' => 'required',
     'address' => 'required',
+    'user_phone' => 'required',
     ], [
     'login_id.required' => 'ログインIDを入力してください。',
     'login_id.unique' => 'このログインIDは既に使われています。',
@@ -30,6 +31,7 @@ class UserController extends Controller
     'password.confirmed' => 'パスワード確認が一致しません。',
     'name.required' => '氏名を入力してください。',
     'address.required' => '住所を入力してください。',
+    'user_phone.required' => '電話番号を入力してください。',
     ]);
 
         Account::create([
@@ -37,6 +39,7 @@ class UserController extends Controller
             'password_hash' => Hash::make($request->password),
             'name' => $request->name,
             'address' => $request->address,
+            'user_phone' => $request->user_phone,
         ]);
 
         return redirect('/login')
