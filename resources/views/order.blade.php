@@ -39,9 +39,8 @@
     </style>
 </head>
 <body>
+@include('layouts.header')
 <div class="cart-container">
-
-    <p class="cart-user">{{ $userName }}さん</p>
     <h1 class="cart-title">購入確認</h1>
 
     <div class="cart-items">
