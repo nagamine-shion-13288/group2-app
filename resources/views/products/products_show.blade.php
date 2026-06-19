@@ -44,6 +44,7 @@
     </style>
 </head>
 <body>
+@include('layouts.header')
 <div class="container">
 
     <div class="back-link">
