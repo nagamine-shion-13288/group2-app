@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
+
+require __DIR__.'/product_route.php';
 
 require __DIR__.'/product_route.php';
 
@@ -23,4 +26,6 @@ Route::post('/login/add', [UserController::class, 'accountAdd'])->name('account.
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/cart/check', [OrderController::class, 'confirm'])->name('cart.check');
+Route::post('/complete', [OrderController::class, 'complete'])->name('order.complete');
 
