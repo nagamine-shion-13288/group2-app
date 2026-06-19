@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>購入確認画面</title>
+    <style>
+        /* 画面の斜め左上（少し内側）に表示するイメージ */
+        .user-info {
+            position: absolute;
+            top: 10px;   /* 上から少し下げる */
+            left: 10px;  /* 左から少し右に寄せる */
+            font-size: 16px;
+        }
+        .title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .item-row {
+    display: flex;          /* 横並びにする */
+    align-items: center;
+    gap: 20px;
+    margin-top: 120px;
+}
+
+.item-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ← ここを修正！ */
+.item-info {
+    display: flex;
+    flex-direction: row;    /* 横並びに変更 */
+    gap: 30px;              /* 項目同士の間隔 */
+}
+
+.item-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.item-price {
+    font-size: 18px;
+    color: #333;
+}
+
+.item-quantity {
+    font-size: 16px;
+}
+/* 合計金額（右下） */
+.total-price {
+    position: absolute;
+    right: 30px;
+    bottom: 120px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* ボタンエリア（中央下） */
+.button-area {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 40px;
+}
+
+button {
+    padding: 10px 30px;
+    font-size: 18px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+/* 戻るボタン → 赤 */
+.back-btn {
+    background-color: #ff4d4d;   /* 明るい赤 */
+    color: white;
+}
+
+/* 購入ボタン → 黄色 */
+.buy-btn {
+    background-color: #ffeb3b;   /* 明るい黄色 */
+    color: black;
+}
+    </style>
+</head>
+<body>
+
+    <!-- userId さん を表示 -->
+    <div class="user-info">
+        <!-- ここにサーバーから渡された userId を入れる -->
+        <!-- 例：PHPなら -->
+        <!-- <?php echo htmlspecialchars($userId); ?> さん -->
+        {{ $userId }}さん
+    </div>
+
+    <!-- ここから購入確認の内容を追加していく -->
+    
+	<h1 class="title">購入確認</h1>
+    <!-- 商品情報など -->
+    <div class="item-row">
+    <!-- 商品画像 -->
+    <img src="/images/{{ $pictureId }}.jpg" class="item-image">
+
+    <!-- 商品情報 -->
+    <div class="item-info">
+        <div class="item-name">{{ $itemName }}</div>
+        <div class="item-price">￥{{ number_format($itemPrice) }}</div>
+        <div class="item-quantity">個数：1</div>
+    </div>
+</div>
+<div class="total-price">
+    合計金額　￥{{ number_format($totalPrice) }}
+</div>
+
+<!-- ボタン（中央下） -->
+<div class="button-area">
+    <button class="back-btn">戻る</button>
+    <!--カート画面に戻る-->
+    <button class="buy-btn">購入</button>
+    <!--購入完了画面に戻る-->
+</div>
+</body>
+</html>
