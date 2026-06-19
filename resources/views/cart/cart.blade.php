@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>カート</title>
+    <link rel="icon" type="image/png" href="{{ asset('D.png?v=1') }}">
     <style>
         body { font-family: sans-serif; }
 
@@ -38,12 +39,8 @@
     </style>
 </head>
 <body>
+@include('layouts.header')
 <div class="cart-container">
-
-    <p class="cart-user">{{ $user->name ?? 'ゲスト' }}さん</p>
-    <a href="javascript:history.back()" class="btn-back">戻る</a>
-    <h1 class="cart-title">カート</h1>
-
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -86,7 +83,7 @@
                 合計金額　<span class="cart-total__price">¥{{ number_format($totalPrice) }}</span>
             </p>
             <!-- TODO: /cart/checkを追加 -->
-            <a href="#" class="btn-primary">購入確認へ</a>
+            <a href="{{ route('cart.check') }}" class="btn-primary">購入確認へ</a>
         </div>
     @endif
 
