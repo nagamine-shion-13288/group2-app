@@ -9,7 +9,7 @@
         body { font-family: sans-serif; margin: 0; padding: 0; }
         .container {
             max-width: 720px;
-            margin: 0 auto;
+            margin: 70px auto 0 auto; /* 💡 上にヘッダー分の余白（70px）を追加 */
             padding: 24px 16px;
         }
         .back-link { font-size: 14px; margin-bottom: 16px; }
@@ -27,7 +27,6 @@
 
         .product-info { flex: 1; }
         
-        /* 💡 追加：ショップ名のスタイル（少し小さめでグレーにするとおしゃれです） */
         .shop-name { font-size: 13px; color: #777; margin: 0 0 4px 0; font-weight: bold; }
         
         .product-name { font-size: 22px; font-weight: bold; margin: 0 0 12px 0; }
