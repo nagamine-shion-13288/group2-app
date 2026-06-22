@@ -12,7 +12,7 @@
 
         .account-container {
             max-width: 720px;
-            margin: 0 auto;
+            margin: 70px auto 0 auto; /* 💡 上にヘッダー分の余白（70px）を追加 */
             padding: 24px 16px;
         }
         .account-user { font-size: 14px; color: #555; margin-bottom: 4px; }
