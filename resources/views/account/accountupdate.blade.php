@@ -12,7 +12,7 @@
 
         .account-container {
             max-width: 720px;
-            margin: 0 auto;
+            margin: 70px auto 0 auto; /* 💡 上にヘッダー分の余白（70px）を追加 */
             padding: 24px 16px;
         }
         .account-user { font-size: 14px; color: #555; margin-bottom: 4px; }
@@ -28,6 +28,7 @@
             font-size: 15px;
             padding: 4px 2px;
             outline: none;
+            box-sizing: border-box;
         }
         .form-field input:focus { border-bottom: 1px solid #4f5fe0; }
         .form-hint { font-size: 12px; color: #888; margin-top: 4px; }
