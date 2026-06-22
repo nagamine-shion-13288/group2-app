@@ -52,6 +52,7 @@
             gap: 35px;
             padding: 0;
             list-style: none;
+            justify-content: center;
         }
 
         .product-item {
