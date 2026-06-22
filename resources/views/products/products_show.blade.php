@@ -21,24 +21,27 @@
             .product-detail { flex-direction: column; gap: 24px; }
         }
 
-        /* カート画面の画像スタイルと統一 */
         .product-image { flex-shrink: 0; width: 280px; height: 280px; background: #ccc; border-radius: 4px; overflow: hidden; }
         .product-image img { width: 100%; height: 100%; object-fit: cover; }
         .product-image--placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; background: #aaa; }
 
         .product-info { flex: 1; }
+        
+        /* 💡 追加：ショップ名のスタイル（少し小さめでグレーにするとおしゃれです） */
+        .shop-name { font-size: 13px; color: #777; margin: 0 0 4px 0; font-weight: bold; }
+        
         .product-name { font-size: 22px; font-weight: bold; margin: 0 0 12px 0; }
-        .product-price { font-size: 18px; font-weight: bold; text-decoration: underline; margin-bottom: 24px; }
+        .product-price { font-size: 18px; font-weight: bold; text-decoration: underline; margin-bottom: 16px; }
+        
+        .product-description { font-size: 14px; line-height: 1.6; color: #333; margin-bottom: 24px; white-space: pre-wrap; }
         
         .stock-status { font-size: 14px; color: #555; margin-bottom: 16px; }
         .stock-out { color: #c0392b; font-weight: bold; }
 
-        /* カート追加フォーム */
         .cart-form { border-top: 1px solid #e0e0e0; padding-top: 20px; }
         .quantity-select { margin-bottom: 16px; font-size: 14px; }
         .quantity-select select { padding: 6px 12px; font-size: 14px; border-radius: 4px; border: 1px solid #ccc; }
         
-        /* カート画面のボタンのスタイルを流用 */
         .btn-submit { background: #333; color: #fff; border: none; padding: 10px 24px; border-radius: 4px; font-size: 14px; cursor: pointer; width: 100%; max-width: 200px; }
         .btn-submit:hover { background: #555; }
     </style>
@@ -51,21 +54,26 @@
         <a href="/products">&lt; 商品一覧に戻る</a>
     </div>
 
-   <div class="product-detail">
+    <div class="product-detail">
         <div class="product-image">
-        @if ($product->images && $product->images->isNotEmpty() && $product->images->first()->url)
-            <img src="{{ $product->images->first()->url }}" alt="{{ $product->name }}">
-        @else
-            <div class="product-image--placeholder">画像</div>
-        @endif
-    </div>
+            @if ($product->images && $product->images->isNotEmpty() && $product->images->first()->url)
+                <img src="{{ $product->images->first()->url }}" alt="{{ $product->name }}">
+            @else
+                <div class="product-image--placeholder">画像</div>
+            @endif
+        </div>
         
         <div class="product-info">
-            </div>
-    </div>
-        <div class="product-info">
+            @if($product->shop)
+                <p class="shop-name">{{ $product->shop->name }}</p>
+            @endif
+
             <h1 class="product-name">{{ $product->name }}</h1>
             <p class="product-price">¥{{ number_format($product->price) }}</p>
+
+            @if($product->description)
+                <div class="product-description">{{ $product->description }}</div>
+            @endif
 
             <p class="stock-status">
                 @if ($product->stock > 0)
