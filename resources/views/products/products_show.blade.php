@@ -82,22 +82,31 @@
                     <span class="stock-out">売り切れ</span>
                 @endif
             </p>
+           @if ($product->stock > 0)
+                @if (session('userId'))
+                    {{-- ログイン済み：カートに入れるボタン --}}
+                    <form action="{{ route('cart.store', $product->id) }}" method="POST" class="cart-form">
+                        @csrf
 
-            @if ($product->stock > 0)
-                <form action="{{ route('cart.store', $product->id) }}" method="POST" class="cart-form">
-                    @csrf
+                        <div class="quantity-select">
+                            <label for="quantity">個数：</label>
+                            <select name="quantity" id="quantity">
+                                @for ($i = 1; $i <= min($product->stock, 10); $i++)
+                                    <option value="{{ $i }}">{{ $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
 
-                    <div class="quantity-select">
-                        <label for="quantity">個数：</label>
-                        <select name="quantity" id="quantity">
-                            @for ($i = 1; $i <= min($product->stock, 10); $i++)
-                                <option value="{{ $i }}">{{ $i }}</option>
-                            @endfor
-                        </select>
+                        <button type="submit" class="btn-submit">カートに入れる</button>
+                    </form>
+                @else
+                    {{-- 未ログイン：ログインボタン --}}
+                    <div class="cart-form">
+                        <a href="{{ route('login') }}" class="btn-submit" style="display:inline-block; text-align:center; text-decoration:none;">
+                            カートに入れるためにログイン
+                        </a>
                     </div>
-
-                    <button type="submit" class="btn-submit">カートに入れる</button>
-                </form>
+                @endif
             @endif
         </div>
     </div>
