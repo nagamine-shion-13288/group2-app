@@ -6,15 +6,15 @@
     <title>カート</title>
     <link rel="icon" type="image/png" href="{{ asset('D.png?v=1') }}">
     <style>
-            body {
-                font-family: sans-serif; 
-                margin: 0;
-                padding: 0;
-            }
+        body {
+            font-family: sans-serif; 
+            margin: 0;
+            padding: 0;
+        }
 
         .cart-container {
             max-width: 720px;
-            margin: 0 auto;
+            margin: 70px auto 0 auto; /* 💡 上にヘッダー分の余白（70px）を追加 */
             padding: 24px 16px;
         }
         .cart-user { font-size: 14px; color: #555; margin-bottom: 4px; }
@@ -68,7 +68,7 @@
                         <p class="cart-item__name">{{ $item['itemName'] }}</p>
                         <p class="cart-item__price">
                             ¥{{ number_format($item['itemPrice']) }}
-                            <span class="cart-item__quantity">個数　{{ $item['quantity'] }}</span>
+                            <span class="cart-item__quantity">個数 {{ $item['quantity'] }}</span>
                         </p>
                     </div>
                     <div class="cart-item__actions">
@@ -84,9 +84,8 @@
 
         <div class="cart-footer">
             <p class="cart-total">
-                合計金額　<span class="cart-total__price">¥{{ number_format($totalPrice) }}</span>
+                合計金額 <span class="cart-total__price">¥{{ number_format($totalPrice) }}</span>
             </p>
-            <!-- TODO: /cart/checkを追加 -->
             <a href="{{ route('cart.check') }}" class="btn-primary">購入確認へ</a>
         </div>
     @endif
