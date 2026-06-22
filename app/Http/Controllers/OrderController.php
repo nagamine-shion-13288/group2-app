@@ -7,34 +7,32 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    // 購入確認画面
     public function confirm()
     {
         $userId   = session('userId');
         $userName = session('userName');
 
-        // 未ログインの場合はログイン画面へ
         if (!$userId) {
             return redirect('/login');
         }
-    // ユーザーの住所を取得
-    $user = DB::table('users')->where('id', $userId)->first();
+
+        $user = DB::table('users')->where('id', $userId)->first();
 
         $cartItems = DB::table('carts')
-    ->join('products', 'carts.product_id', '=', 'products.id')
-    ->leftJoin('products_img', function($join) {
-        $join->on('products.id', '=', 'products_img.product_id')
-             ->whereRaw('products_img.id = (select min(id) from products_img where product_id = products.id)');
-    })
-    ->where('carts.user_id', $userId)
-    ->select(
-        'products.id as itemId',
-        'products.name as itemName',
-        'products.price as itemPrice',
-        'products_img.url as pictureUrl',
-        'carts.quantity'
-    )
-    ->get();
+            ->join('products', 'carts.product_id', '=', 'products.id')
+            ->leftJoin('products_img', function($join) {
+                $join->on('products.id', '=', 'products_img.product_id')
+                     ->whereRaw('products_img.id = (select min(id) from products_img where product_id = products.id)');
+            })
+            ->where('carts.user_id', $userId)
+            ->select(
+                'products.id as itemId',
+                'products.name as itemName',
+                'products.price as itemPrice',
+                'products_img.url as pictureUrl',
+                'carts.quantity'
+            )
+            ->get();
 
         $totalPrice = $cartItems->sum(fn($item) => $item->itemPrice * $item->quantity);
 
@@ -46,7 +44,6 @@ class OrderController extends Controller
         ]);
     }
 
-    // 購入完了処理
     public function complete(Request $request)
     {
         $userId   = session('userId');
@@ -56,73 +53,83 @@ class OrderController extends Controller
             return redirect('/login');
         }
 
-    // お届け先の決定
-    $address = $request->delivery_type === 'home'
-        ? $request->home_address
-        : $request->manual_address;
+        $address = $request->delivery_type === 'home'
+            ? $request->home_address
+            : $request->manual_address;
 
         $cartItems = DB::table('carts')
             ->join('products', 'carts.product_id', '=', 'products.id')
             ->where('carts.user_id', $userId)
             ->select(
                 'products.id as itemId',
+                'products.name as itemName',
                 'products.price as itemPrice',
+                'products.stock',
                 'carts.quantity'
             )
             ->get();
 
         $totalPrice = $cartItems->sum(fn($item) => $item->itemPrice * $item->quantity);
 
-        DB::transaction(function () use ($userId, $cartItems, $totalPrice) {
+        try {
+            DB::transaction(function () use ($userId, $cartItems, $totalPrice) {
 
-            $orderId = DB::table('orders')->insertGetId([
-                'user_id'     => $userId,
-                'total_price' => $totalPrice,
-            ]);
-
-            foreach ($cartItems as $item) {
-                DB::table('order_details')->insert([
-                    'order_id'   => $orderId,
-                    'product_id' => $item->itemId,
-                    'quantity'   => $item->quantity,
-                    'price'      => $item->itemPrice,
+                $orderId = DB::table('orders')->insertGetId([
+                    'user_id'     => $userId,
+                    'total_price' => $totalPrice,
                 ]);
-            }
 
-            DB::table('carts')->where('user_id', $userId)->delete();
-        });
+                foreach ($cartItems as $item) {
+                    if ($item->stock < $item->quantity) {
+                        throw new \Exception($item->itemName . 'の在庫が足りまへん！');
+                    }
+
+                    DB::table('order_details')->insert([
+                        'order_id'   => $orderId,
+                        'product_id' => $item->itemId,
+                        'quantity'   => $item->quantity,
+                        'price'      => $item->itemPrice,
+                    ]);
+
+                    DB::table('products')
+                        ->where('id', $item->itemId)
+                        ->decrement('stock', $item->quantity);
+                }
+
+                DB::table('carts')->where('user_id', $userId)->delete();
+            });
+
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
 
         return view('ordercomplete', [
             'userName' => $userName,
         ]);
     }
 
-    // 注文履歴画面を表示
     public function history()
     {
         $userId   = session('userId');
         $userName = session('userName');
 
-        // 未ログインの場合はログイン画面へ
         if (!$userId) {
             return redirect('/login');
         }
 
-        // ログインユーザーの注文履歴を取得
         $orderHistories = DB::table('orders')
             ->join('order_details', 'orders.id', '=', 'order_details.order_id')
             ->join('products', 'order_details.product_id', '=', 'products.id')
             ->leftJoin('products_img', 'products.id', '=', 'products_img.product_id')
             ->where('orders.user_id', $userId)
             ->select(
-                'products_img.url as pictureUrl',   // 商品画像
-                'products.name as itemName',       // 商品名
-                'order_details.quantity',          // 個数
-                'order_details.price as itemPrice',// 値段（購入時の単価）
-                'orders.shipping_address',         // お届け先
-                'orders.created_at as orderDate'   // 購入日
+                'products_img.url as pictureUrl',
+                'products.name as itemName',
+                'order_details.quantity',
+                'order_details.price as itemPrice',
+                'orders.shipping_address',
+                'orders.created_at as orderDate'
             )
-            // 最新の購入履歴が一番上に来るように並び替え
             ->orderBy('orders.created_at', 'desc') 
             ->get();
 
