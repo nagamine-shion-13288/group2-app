@@ -37,7 +37,6 @@
 @include('layouts.header')
 <div class="history-container">
 
-    <a href="javascript:history.back()" class="btn-back">戻る</a>
     <h1 class="history-title">注文履歴</h1>
 
     @if ($orderHistories->isEmpty())
