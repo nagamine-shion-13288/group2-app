@@ -9,29 +9,33 @@ use App\Models\Category;
 
 class ProductController extends Controller 
 { 
-    // 商品一覧画面用（これまでの処理）
     public function products(Request $request) { 
-        
-        $selectedCategoryId = $request->input('category_id');
+    
+    $selectedCategoryId = $request->input('category_id');
+    $keyword = $request->input('keyword'); // 💡検索キーワードを取得
 
-        if ($selectedCategoryId) {
-            $products = Product::with('images')->where('category_id', $selectedCategoryId)->get();
-        } else {
-            // ★ここを「all()」から「get()」に変更します
-            $products = Product::with('images')->get();
-        }
+    // 1. クエリの土台を作成
+    $query = Product::with('images');
 
-        $categories = Category::all();
+    // 2. カテゴリが選択されていれば条件を追加
+    if ($selectedCategoryId) {
+        $query->where('category_id', $selectedCategoryId);
+    }
 
-        return view('products', compact('products', 'categories', 'selectedCategoryId'));
-    } 
+    // 3. 💡検索キーワードがあれば「あいまい検索」の条件を追加
+    if (!empty($keyword)) {
+        $query->where('name', 'LIKE', "%{$keyword}%");
+    }
 
+    // 4. 最終的な条件でデータを取得
+    $products = $query->get();
 
-    public function show(int $id) {
-        // 画像リレーション（images）を一緒に読み込みつつ、IDで1件取得
-        $product = Product::with('images')->findOrFail($id);
+    $categories = Category::all();
 
-        return view('products.products_show', compact('product'));
+    return view('products', compact('products', 'categories', 'selectedCategoryId'));
 }
-
+public function show(int $id) {
+        $product = Product::with(['images', 'shop'])->findOrFail($id);
+        return view('products.products_show', compact('product'));
+    }
 }
