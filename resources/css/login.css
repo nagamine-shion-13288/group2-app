@@ -98,3 +98,18 @@ body {
 .link-area a:hover {
     text-decoration: underline;
 }
+
+.guest-link {
+    text-align: center;
+    margin-top: 16px;
+}
+
+.guest-link a {
+    font-size: 13px;
+    color: #888;
+    text-decoration: none;
+}
+
+.guest-link a:hover {
+    text-decoration: underline;
+}

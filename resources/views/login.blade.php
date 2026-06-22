@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <link rel="icon" type="image/png" href="{{ asset('D.png?v=1') }}">
-    
+
 </head>
 <body>
     <div class="container">
@@ -51,7 +51,8 @@
                 <a href="/login/add">新規登録はこちら</a>
             </div>
 
-        </div>
+            </div>
+
     </div>
 </body>
 </html>
