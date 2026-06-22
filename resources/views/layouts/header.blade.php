@@ -66,7 +66,7 @@
 .logout-button {
     background: none;
     border: none;
-    color: #333333;
+    color: red;
     cursor: pointer;
     font-size: 15px;
     padding: 0;
@@ -93,18 +93,22 @@
         @endif
     </div>
 
-    <form class="search-form">
+    <form action="{{url('/products')}}" method="GET" class="search-form">
         <input
             type="text"
             class="search-box"
             placeholder="商品を検索">
+        <button type="submit" class="search-button">検索🔎</button>
     </form>
 
     <nav class="header-nav">
 
         @if (session()->has('userId'))
 
-            <form action="{{ route('logout') }}" method="POST" class="logout-form">
+            <form action="{{ route('logout') }}" 
+            method="POST" 
+            class="logout-form"
+            onsubmit="return confirm('ログアウトしますか？')">
                 @csrf
                 <button type="submit" class="logout-button">
                     ログアウト
