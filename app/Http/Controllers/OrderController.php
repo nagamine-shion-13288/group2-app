@@ -17,24 +17,30 @@ class OrderController extends Controller
         if (!$userId) {
             return redirect('/login');
         }
+    // ユーザーの住所を取得
+    $user = DB::table('users')->where('id', $userId)->first();
 
         $cartItems = DB::table('carts')
-            ->join('products', 'carts.product_id', '=', 'products.id')
-            ->leftJoin('products_img', 'products.id', '=', 'products_img.product_id')
-            ->where('carts.user_id', $userId)
-            ->select(
-                'products.id as itemId',
-                'products.name as itemName',
-                'products.price as itemPrice',
-                'products_img.url as pictureUrl',
-                'carts.quantity'
-            )
-            ->get();
+    ->join('products', 'carts.product_id', '=', 'products.id')
+    ->leftJoin('products_img', function($join) {
+        $join->on('products.id', '=', 'products_img.product_id')
+             ->whereRaw('products_img.id = (select min(id) from products_img where product_id = products.id)');
+    })
+    ->where('carts.user_id', $userId)
+    ->select(
+        'products.id as itemId',
+        'products.name as itemName',
+        'products.price as itemPrice',
+        'products_img.url as pictureUrl',
+        'carts.quantity'
+    )
+    ->get();
 
         $totalPrice = $cartItems->sum(fn($item) => $item->itemPrice * $item->quantity);
 
         return view('order', [
             'userName'   => $userName,
+            'userAddress' => $user->address ?? '',
             'cartItems'  => $cartItems,
             'totalPrice' => $totalPrice,
         ]);
@@ -49,6 +55,11 @@ class OrderController extends Controller
         if (!$userId) {
             return redirect('/login');
         }
+
+    // お届け先の決定
+    $address = $request->delivery_type === 'home'
+        ? $request->home_address
+        : $request->manual_address;
 
         $cartItems = DB::table('carts')
             ->join('products', 'carts.product_id', '=', 'products.id')
