@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>アカウント更新</title>
     <style>
-        body { font-family: sans-serif; }
+        body { font-family: sans-serif; 
+                margin: 0;
+                padding: 0;
+            }
 
         .account-container {
             max-width: 720px;
@@ -51,10 +54,11 @@
     </style>
 </head>
 <body>
+
+@include('layouts.header')
+
 <div class="account-container">
 
-    <p class="account-user">{{ $account->name ?? 'ゲスト' }}さん</p>
-    <a href="javascript:history.back()" class="btn-back">戻る</a>
     <h1 class="account-title">アカウント管理</h1>
 
     @if ($errors->any())
