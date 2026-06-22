@@ -34,4 +34,8 @@ class ProductController extends Controller
 
     return view('products', compact('products', 'categories', 'selectedCategoryId'));
 }
+public function show(int $id) {
+        $product = Product::with(['images', 'shop'])->findOrFail($id);
+        return view('products.products_show', compact('product'));
+    }
 }
