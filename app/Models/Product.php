@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -13,4 +14,11 @@ class Product extends Model
     {
         return $this->hasMany(ProductImg::class, 'product_id', 'id');
     }
+    // app/Models/Product.php の中身
+
+public function shop()
+{
+    // 商品は特定の1つのショップに所属する
+    return $this->belongsTo(Shop::class);
+}
 }
