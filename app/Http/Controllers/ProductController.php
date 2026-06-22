@@ -9,29 +9,39 @@ use App\Models\Category;
 
 class ProductController extends Controller 
 { 
-    // 商品一覧画面用（これまでの処理）
     public function products(Request $request) { 
         
         $selectedCategoryId = $request->input('category_id');
+        $keyword = $request->input('keyword'); 
+        $selectedSort = $request->input('sort', 'latest'); 
+
+        $query = Product::with('images');
 
         if ($selectedCategoryId) {
-            $products = Product::with('images')->where('category_id', $selectedCategoryId)->get();
-        } else {
-            // ★ここを「all()」から「get()」に変更します
-            $products = Product::with('images')->get();
+            $query->where('category_id', $selectedCategoryId);
         }
+
+        if (!empty($keyword)) {
+            $query->where('name', 'LIKE', "%{$keyword}%");
+        }
+
+        if ($selectedSort === 'price_asc') {
+            $query->orderBy('price', 'asc'); 
+        } elseif ($selectedSort === 'price_desc') {
+            $query->orderBy('price', 'desc'); 
+        } else {
+            $query->orderBy('created_at', 'desc'); 
+        }
+
+        $products = $query->paginate(16);
 
         $categories = Category::all();
 
-        return view('products', compact('products', 'categories', 'selectedCategoryId'));
-    } 
-
+        return view('products', compact('products', 'categories', 'selectedCategoryId', 'selectedSort', 'keyword'));
+    }
 
     public function show(int $id) {
-        // 画像リレーション（images）を一緒に読み込みつつ、IDで1件取得
-        $product = Product::with('images')->findOrFail($id);
-
+        $product = Product::with(['images', 'shop'])->findOrFail($id);
         return view('products.products_show', compact('product'));
-}
-
+    }
 }

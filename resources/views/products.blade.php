@@ -19,24 +19,32 @@
             padding: 40px 20px;
         }
 
-        .filter-form {
+        .filter-container {
             margin-bottom: 40px;
-            text-align: left;
             background-color: #fff;
             padding: 15px 20px;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            display: inline-block;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
         }
 
-        .filter-form label {
+        .filter-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .filter-group label {
             font-size: 14px;
             font-weight: bold;
             color: #4a5568;
             margin-right: 10px;
+            white-space: nowrap;
         }
 
-        .filter-form select {
+        .filter-group select {
             padding: 8px 16px;
             font-size: 14px;
             border: 1px solid #cbd5e0;
@@ -52,6 +60,8 @@
             gap: 35px;
             padding: 0;
             list-style: none;
+            justify-content: center;
+            margin-bottom: 40px;
         }
 
         .product-item {
@@ -107,6 +117,7 @@
             height: 44px;
             display: -webkit-box;
             -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
             overflow: hidden;
         }
 
@@ -114,6 +125,62 @@
             font-size: 18px;
             font-weight: 800;
             color: #1a202c;
+        }
+
+        /* ページネーションのデザインをシンプルに再構築 */
+        .pagination-wrapper {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .pagination-wrapper ul.pagination {
+            display: flex;
+            padding-left: 0;
+            list-style: none;
+            border-radius: 6px;
+            gap: 5px;
+            margin: 0;
+        }
+
+        .pagination-wrapper li.page-item {
+            display: inline;
+        }
+
+        .pagination-wrapper li.page-item a,
+        .pagination-wrapper li.page-item span {
+            position: relative;
+            display: block;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #4a5568;
+            text-decoration: none;
+            background-color: #fff;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .pagination-wrapper li.page-item a:hover {
+            background-color: #edf2f7;
+            border-color: #cbd5e0;
+            color: #2d3748;
+        }
+
+        .pagination-wrapper li.page-item.active span {
+            z-index: 3;
+            color: #fff;
+            background-color: #4a5568;
+            border-color: #4a5568;
+            cursor: default;
+        }
+
+        .pagination-wrapper li.page-item.disabled span {
+            color: #a0aec0;
+            cursor: not-allowed;
+            background-color: #fff;
+            border-color: #e2e8f0;
         }
     </style>
 </head>
@@ -124,19 +191,30 @@
 
     <main class="main-content">
 
-        <div class="filter-form">
-            <form action="{{ url('/products') }}" method="GET">
-                <label for="category_select">カテゴリーで絞り込む：</label>
+        <div class="filter-container">
+            <form action="{{ url('/products') }}" method="GET" style="display: flex; gap: 20px; flex-wrap: wrap; width: 100%;">
+                
+                <div class="filter-group">
+                    <label for="category_select">カテゴリー：</label>
+                    <select name="category_id" id="category_select" onchange="this.form.submit()">
+                        <option value="">すべてのカテゴリー</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}" {{ $selectedCategoryId == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-                <select name="category_id" id="category_select" onchange="this.form.submit()">
-                    <option value="">すべてのカテゴリー</option>
+                <div class="filter-group">
+                    <label for="sort_select">並び替え：</label>
+                    <select name="sort" id="sort_select" onchange="this.form.submit()">
+                        <option value="latest" {{ $selectedSort == 'latest' ? 'selected' : '' }}>新着順</option>
+                        <option value="price_asc" {{ $selectedSort == 'price_asc' ? 'selected' : '' }}>価格の低い順</option>
+                        <option value="price_desc" {{ $selectedSort == 'price_desc' ? 'selected' : '' }}>価格の高い順</option>
+                    </select>
+                </div>
 
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}" {{ $selectedCategoryId == $category->id ? 'selected' : '' }}>
-                            {{ $category->name }}
-                        </option>
-                    @endforeach
-                </select>
             </form>
         </div>
 
@@ -169,6 +247,10 @@
                 </li>
             @endforeach
         </ul>
+
+        <div class="pagination-wrapper">
+            {{ $products->appends(request()->query())->links('pagination::bootstrap-4') }}
+        </div>
 
     </main>
 
