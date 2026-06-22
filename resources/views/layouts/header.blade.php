@@ -62,29 +62,42 @@
     font-size: 14px;
     border-radius: 5px;
     cursor: pointer;
-    white-space: nowrap;
-    transition: background-color 0.2s;
-}
-
-.search-button:hover {
-    background-color: #555555;
 }
 
 .header-nav {
     display: flex;
     align-items: center;
     gap: 20px;
+    margin-right: 40px;
 }
 
 .header-nav a {
     text-decoration: none;
     color: #333333;
+    font-weight: bold;
 }
 
+.logout-form {
+    margin: 0;
+}
+
+.logout-button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.logout-button:hover,
 .header-nav a:hover {
     text-decoration: underline;
 }
 
+/* ここからハンバーガーメニュー用 */
 .hamburger-btn {
     position: fixed;
     top: 22px;
@@ -150,7 +163,7 @@
     border-bottom: 1px solid #edf2f7;
 }
 
-.sidebar-menu li a, 
+.sidebar-menu li a,
 .sidebar-menu li button {
     display: block;
     width: 100%;
@@ -167,7 +180,7 @@
     font-family: inherit;
 }
 
-.sidebar-menu li a:hover, 
+.sidebar-menu li a:hover,
 .sidebar-menu li button:hover {
     background-color: #f7fafc;
 }
@@ -189,14 +202,6 @@
     display: block;
     opacity: 1;
 }
-
-.logout-form {
-    margin: 0;
-}
-
-.logout-button {
-    color: red !important;
-}
 </style>
 
 <header class="site-header">
@@ -215,14 +220,31 @@
     <form action="{{ url('/products') }}" method="GET" class="search-form">
         <input
             type="text"
-            name="keyword" 
+            name="keyword"
             class="search-box"
             placeholder="商品を検索"
             value="{{ request('keyword') }}">
-        
+
         <button type="submit" class="search-button">検索</button>
     </form>
 
+    <div class="header-nav">
+        @if (session()->has('userId'))
+            <form action="{{ route('logout') }}"
+                  method="POST"
+                  class="logout-form"
+                  onsubmit="return confirm('ログアウトしますか？')">
+                @csrf
+                <button type="submit" class="logout-button">
+                    ログアウト
+                </button>
+            </form>
+        @endif
+
+        <a href="{{ url('/cart') }}">
+            カート🛒
+        </a>
+    </div>
 </header>
 
 <button class="hamburger-btn" id="menu-btn">
@@ -235,16 +257,20 @@
 
 <nav class="sidebar-menu" id="sidebar-menu">
     <ul>
-        <li><a href="{{ url('/products') }}">商品一覧</a></li>
         <li><a href="{{ url('/cart') }}">カート🛒</a></li>
-        
+
         @if (session()->has('userId'))
             <li><a href="{{ route('order.history') }}">注文履歴</a></li>
             <li><a href="{{ url('/account') }}">アカウント情報</a></li>
             <li>
-                <form action="{{ route('logout') }}" method="POST" class="logout-form" onsubmit="return confirm('ログアウトしますか？')">
+                <form action="{{ route('logout') }}"
+                      method="POST"
+                      class="logout-form"
+                      onsubmit="return confirm('ログアウトしますか？')">
                     @csrf
-                    <button type="submit" class="logout-button">ログアウト</button>
+                    <button type="submit" class="logout-button">
+                        ログアウト
+                    </button>
                 </form>
             </li>
         @else
@@ -254,20 +280,20 @@
 </nav>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const menuBtn = document.getElementById('menu-btn');
-        const sidebarMenu = document.getElementById('sidebar-menu');
-        const menuOverlay = document.getElementById('menu-overlay');
+document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('menu-btn');
+    const sidebarMenu = document.getElementById('sidebar-menu');
+    const menuOverlay = document.getElementById('menu-overlay');
 
-        function toggleMenu() {
-            menuBtn.classList.toggle('open');
-            sidebarMenu.classList.toggle('open');
-            menuOverlay.classList.toggle('open');
-        }
+    function toggleMenu() {
+        menuBtn.classList.toggle('open');
+        sidebarMenu.classList.toggle('open');
+        menuOverlay.classList.toggle('open');
+    }
 
-        if(menuBtn && sidebarMenu && menuOverlay) {
-            menuBtn.addEventListener('click', toggleMenu);
-            menuOverlay.addEventListener('click', toggleMenu);
-        }
-    });
+    if (menuBtn && sidebarMenu && menuOverlay) {
+        menuBtn.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+    }
+});
 </script>
