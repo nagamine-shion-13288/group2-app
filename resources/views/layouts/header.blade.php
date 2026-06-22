@@ -111,7 +111,7 @@
                 </button>
             </form>
 
-            <a href="{{ url('/orderhistory') }}">
+            <a href="{{ route('order.history') }}">
                 注文履歴
             </a>
 
