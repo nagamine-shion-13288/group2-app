@@ -44,6 +44,7 @@
         }
         .btn-back-red:hover { background: #a93226; }
     </style>
+    
 </head>
 <body>
 @include('layouts.header')
