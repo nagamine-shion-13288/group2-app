@@ -26,7 +26,13 @@ Route::post('/login/add', [UserController::class, 'accountAdd'])->name('account.
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::get('/account', [UserController::class, 'showAccount'])->name('account.index');
+Route::get('/account/edit', [UserController::class, 'showAccountUpdateForm'])->name('account.edit');
+Route::post('/account/update', [UserController::class, 'accountUpdate'])->name('account.update');
+
 Route::get('/cart/check', [OrderController::class, 'confirm'])->name('cart.check');
 Route::post('/complete', [OrderController::class, 'complete'])->name('order.complete');
+
 
 Route::get('/orderhistory', [OrderController::class, 'history'])->name('order.history');

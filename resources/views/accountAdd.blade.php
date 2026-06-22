@@ -30,32 +30,32 @@
 
         <div class="field">
             <label>ログインID</label>
-            <input type="text" name="login_id" value="{{ old('login_id') }}">
+            <input type="text" name="login_id" value="{{ old('login_id') }}" placeholder="SuperDaichi">
         </div>
 
         <div class="field">
             <label>パスワード</label>
-            <input type="password" name="password">
+            <input type="password" name="password" placeholder="password">
         </div>
 
         <div class="field">
             <label>パスワード確認</label>
-            <input type="password" name="password_confirmation">
+            <input type="password" name="password_confirmation" placeholder="password">
         </div>
         
         <div class="field">
             <label>氏名</label>
-            <input type="text" name="name" value="{{ old('name') }}">
+            <input type="text" name="name" value="{{ old('name') }}" placeholder="こばだい">
         </div>
 
         <div class="field">
             <label>住所</label>
-            <input type="text" name="address" value="{{ old('address') }}">
+            <input type="text" name="address" value="{{ old('address') }}" placeholder="東京都渋谷区神南1-19-11">
         </div>
 
-        <div class="">
+        <div class="field">
             <label>電話番号</label>
-            <input type="text" name="user_phone" value="{{ old('user_phone') }}">
+            <input type="text" name="user_phone" value="{{ old('user_phone') }}" placeholder="090-1234-5678">
         </div>
 
         <button type="submit" class="btn-register">
