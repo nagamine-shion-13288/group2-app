@@ -6,7 +6,11 @@
     <title>カート</title>
     <link rel="icon" type="image/png" href="{{ asset('D.png?v=1') }}">
     <style>
-        body { font-family: sans-serif; }
+            body {
+                font-family: sans-serif; 
+                margin: 0;
+                padding: 0;
+            }
 
         .cart-container {
             max-width: 720px;
