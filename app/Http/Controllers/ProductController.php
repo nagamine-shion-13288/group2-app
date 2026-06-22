@@ -13,7 +13,7 @@ class ProductController extends Controller
         
         $selectedCategoryId = $request->input('category_id');
         $keyword = $request->input('keyword'); 
-        $selectedSort = $request->input('sort', 'latest'); 
+        $sort = $request->input('sort');
 
         $query = Product::with('images');
 
@@ -25,19 +25,23 @@ class ProductController extends Controller
             $query->where('name', 'LIKE', "%{$keyword}%");
         }
 
-        if ($selectedSort === 'price_asc') {
-            $query->orderBy('price', 'asc'); 
-        } elseif ($selectedSort === 'price_desc') {
-            $query->orderBy('price', 'desc'); 
-        } else {
-            $query->orderBy('created_at', 'desc'); 
+        switch ($sort) {
+            case 'price_asc':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'price_desc':
+                $query->orderBy('price', 'desc');
+                break;
+            default:
+                $query->orderBy('created_at', 'desc');
+                break;
         }
 
-        $products = $query->paginate(16);
+        $products = $query->paginate(12)->withQueryString();
 
         $categories = Category::all();
 
-        return view('products', compact('products', 'categories', 'selectedCategoryId', 'selectedSort', 'keyword'));
+        return view('products', compact('products', 'categories', 'selectedCategoryId', 'sort'));
     }
 
     public function show(int $id) {
