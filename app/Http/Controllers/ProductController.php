@@ -10,31 +10,37 @@ use App\Models\Category;
 class ProductController extends Controller 
 { 
     public function products(Request $request) { 
-    
-    $selectedCategoryId = $request->input('category_id');
-    $keyword = $request->input('keyword'); // 💡検索キーワードを取得
+        
+        $selectedCategoryId = $request->input('category_id');
+        $keyword = $request->input('keyword'); 
+        $selectedSort = $request->input('sort', 'latest'); 
 
-    // 1. クエリの土台を作成
-    $query = Product::with('images');
+        $query = Product::with('images');
 
-    // 2. カテゴリが選択されていれば条件を追加
-    if ($selectedCategoryId) {
-        $query->where('category_id', $selectedCategoryId);
+        if ($selectedCategoryId) {
+            $query->where('category_id', $selectedCategoryId);
+        }
+
+        if (!empty($keyword)) {
+            $query->where('name', 'LIKE', "%{$keyword}%");
+        }
+
+        if ($selectedSort === 'price_asc') {
+            $query->orderBy('price', 'asc'); 
+        } elseif ($selectedSort === 'price_desc') {
+            $query->orderBy('price', 'desc'); 
+        } else {
+            $query->orderBy('created_at', 'desc'); 
+        }
+
+        $products = $query->paginate(16);
+
+        $categories = Category::all();
+
+        return view('products', compact('products', 'categories', 'selectedCategoryId', 'selectedSort', 'keyword'));
     }
 
-    // 3. 💡検索キーワードがあれば「あいまい検索」の条件を追加
-    if (!empty($keyword)) {
-        $query->where('name', 'LIKE', "%{$keyword}%");
-    }
-
-    // 4. 最終的な条件でデータを取得
-    $products = $query->get();
-
-    $categories = Category::all();
-
-    return view('products', compact('products', 'categories', 'selectedCategoryId'));
-}
-public function show(int $id) {
+    public function show(int $id) {
         $product = Product::with(['images', 'shop'])->findOrFail($id);
         return view('products.products_show', compact('product'));
     }
