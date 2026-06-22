@@ -10,7 +10,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 40px;
-    background-color: #06f32d;
+    background-color: #78e961;
     border-bottom: 1px solid #dddddd;
     box-sizing: border-box;
 }
@@ -33,6 +33,11 @@
     font-weight: bold;
 }
 
+.logo-image {
+    height: 70px;
+    width: auto;
+    display: block;
+}
 .user-name {
     font-size: 15px;
     color: #333333;
@@ -141,7 +146,7 @@
     left: -260px;
     width: 260px;
     height: 100%;
-    background-color: #fff;
+    background-image: url('/images/header/つた.jpg');
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     z-index: 1900;
     transition: left 0.3s ease;
@@ -166,23 +171,23 @@
 .sidebar-menu li a,
 .sidebar-menu li button {
     display: block;
-    width: 100%;
+    width: calc(100% - 24px);
+    margin: 8px 12px;
     padding: 15px 25px;
-    color: #333;
-    text-decoration: none;
+
+    color: #ffffff;
     font-size: 16px;
     font-weight: bold;
-    text-align: left;
-    background: none;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+
+    text-align: center;
+
+    text-decoration: none;
     border: none;
-    box-sizing: border-box;
     cursor: pointer;
     font-family: inherit;
-}
-
-.sidebar-menu li a:hover,
-.sidebar-menu li button:hover {
-    background-color: #f7fafc;
 }
 
 .menu-overlay {
@@ -207,7 +212,7 @@
 <header class="site-header">
     <div class="header-left">
         <h1 class="site-title">
-            <a href="{{ url('/products') }}">JUNGLIA</a>
+            <a href="{{ url('/products') }}"><img src="{{ asset('images/header/JUN.png') }}" alt="JUNGLIA" class="logo-image"></a>
         </h1>
 
         @if (session()->has('userId'))
