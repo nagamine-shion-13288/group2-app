@@ -15,8 +15,16 @@
             background-color: #f9f9f9;
         }
 
+        header, .header-class, #header-id {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
         .main-content {
-            padding: 40px 20px;
+            padding: 120px 20px 40px 20px;
         }
 
         .filter-form {
