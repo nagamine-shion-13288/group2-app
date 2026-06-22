@@ -25,7 +25,10 @@
         .btn-primary:hover { background: #555; }
         .btn-back { display: inline-block; font-size: 13px; color: #555; text-decoration: none; margin-bottom: 12px; }
         .btn-back:hover { color: #000; }
-
+        .delivery-section { margin: 24px 0; padding: 16px; border: 1px solid #ddd; border-radius: 8px; }
+        .delivery-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; }
+        .delivery-option { display: block; margin-bottom: 8px; font-size: 14px; cursor: pointer; }
+        .address-input { width: 100%; padding: 8px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; box-sizing: border-box; }
         .btn-back-red {
         display: inline-block;
         background: #c0392b;
@@ -64,17 +67,57 @@
         @endforeach
     </div>
 
-    <div class="cart-footer">
-        <p class="cart-total">
-            合計金額　<span class="cart-total__price">¥{{ number_format($totalPrice) }}</span>
-        </p>
-        <a href="/products" class="btn-back-red">戻る</a>
-        <form action="{{ route('order.complete') }}" method="POST">
-            @csrf
-            <button type="submit" class="btn-primary">購入する</button>
-        </form>
-    </div>
+    <div class="delivery-section">
+    <h2 class="delivery-title">お届け先</h2>
 
+    <label class="delivery-option">
+        <input type="radio" name="delivery_type" value="home" checked
+               onchange="toggleDelivery(this.value)">
+        自宅（{{ $userAddress }}）
+    </label>
+
+    <label class="delivery-option">
+        <input type="radio" name="delivery_type" value="manual"
+               onchange="toggleDelivery(this.value)">
+        手動入力
+    </label>
+
+    <div id="manual-input" style="display:none; margin-top: 8px;">
+        <input type="text" name="manual_address" placeholder="住所を入力してください"
+               class="address-input">
+    </div>
 </div>
+
+   <div class="cart-footer">
+    <p class="cart-total">
+        合計金額　<span class="cart-total__price">¥{{ number_format($totalPrice) }}</span>
+    </p>
+    <form action="{{ route('order.complete') }}" method="POST" id="order-form">
+        @csrf
+        <input type="hidden" name="delivery_type" id="delivery_type_input" value="home">
+        <input type="hidden" name="home_address" value="{{ $userAddress }}">
+        <input type="hidden" name="manual_address" id="manual_address_input" value="">
+        <div style="display:flex; gap:12px;">
+            <a href="/products" class="btn-back-red">戻る</a>
+            <button type="submit" class="btn-primary">購入する</button>
+        </div>
+    </form>
+</div>
+    </form>
+</div>
+</div>
+<script>
+function toggleDelivery(value) {
+    document.getElementById('delivery_type_input').value = value;
+    document.getElementById('manual-input').style.display =
+        value === 'manual' ? 'block' : 'none';
+}
+
+// 手動入力の値をhiddenに同期
+document.querySelector('input[name="manual_address"]') &&
+document.querySelector('.address-input').addEventListener('input', function() {
+    document.getElementById('manual_address_input').value = this.value;
+});
+</script>
 </body>
 </html>
