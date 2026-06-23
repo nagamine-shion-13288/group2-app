@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\admin\adminproductsController;
 
 require __DIR__.'/product_route.php';
 
@@ -36,3 +37,9 @@ Route::post('/complete', [OrderController::class, 'complete'])->name('order.comp
 
 
 Route::get('/orderhistory', [OrderController::class, 'history'])->name('order.history');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/products', [adminproductsController::class, 'index'])->name('products.index');
+    Route::get('/products/{id}/edit', [adminproductsController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{id}', [adminproductsController::class, 'update'])->name('products.update');
+});
