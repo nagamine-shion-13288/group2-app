@@ -36,58 +36,50 @@
             @endforeach
         </div>
 
-        <div class="delivery-section">
-            <h2 class="delivery-title">お届け先</h2>
+        <form action="{{ route('order.complete') }}" method="POST" id="order-form">
+            @csrf
 
-            <label class="delivery-option">
-                <input type="radio" name="delivery_type" value="home" checked
-                       onchange="toggleDelivery(this.value)">
-                自宅（{{ $userAddress }}）
-            </label>
+            <div class="delivery-section">
+                <h2 class="delivery-title">お届け先</h2>
 
-            <label class="delivery-option">
-                <input type="radio" name="delivery_type" value="manual"
-                       onchange="toggleDelivery(this.value)">
-                手動入力
-            </label>
-
-            <div id="manual-input" style="display:none; margin-top: 8px;">
-                <input type="text" name="manual_address" placeholder="住所を入力してください"
-                       class="address-input">
-            </div>
-        </div>
-
-        <div class="cart-footer">
-            <p class="cart-total">
-                合計金額 <span class="cart-total__price">¥{{ number_format($totalPrice) }}</span>
-            </p>
-            <form action="{{ route('order.complete') }}" method="POST" id="order-form">
-                @csrf
-                <input type="hidden" name="delivery_type" id="delivery_type_input" value="home">
+                <label class="delivery-option">
+                    <input type="radio" name="delivery_type" value="home" checked
+                           onchange="toggleDelivery(this.value)">
+                    自宅（{{ $userAddress }}）
+                </label>
                 <input type="hidden" name="home_address" value="{{ $userAddress }}">
-                <input type="hidden" name="manual_address" id="manual_address_input" value="">
+
+                <label class="delivery-option">
+                    <input type="radio" name="delivery_type" value="manual"
+                           onchange="toggleDelivery(this.value)">
+                    手動入力
+                </label>
+
+                <div id="manual-input" style="display:none; margin-top: 8px;">
+                    <input type="text" name="manual_address" placeholder="住所を入力してください"
+                           class="address-input">
+                </div>
+            </div>
+
+            <div class="cart-footer">
+                <p class="cart-total">
+                    合計金額 <span class="cart-total__price">¥{{ number_format($totalPrice) }}</span>
+                </p>
+                
                 <div style="display:flex; gap:12px;">
                     <a href="/products" class="btn-back-red">戻る</a>
                     <button type="submit" class="btn-primary">購入する</button>
                 </div>
-            </form>
+            </div>
+        </form>
         </div>
-    </div>
 </div>
 
 <script>
+// ラジオボタンの選択に応じて、手動入力欄の表示・非表示を切り替えるだけのシンプルな関数にしました
 function toggleDelivery(value) {
-    document.getElementById('delivery_type_input').value = value;
     document.getElementById('manual-input').style.display =
         value === 'manual' ? 'block' : 'none';
-}
-
-// 手動入力の値をhiddenに同期
-const manualAddressInput = document.querySelector('input[name="manual_address"]');
-if (manualAddressInput) {
-    manualAddressInput.addEventListener('input', function() {
-        document.getElementById('manual_address_input').value = this.value;
-    });
 }
 </script>
 </body>

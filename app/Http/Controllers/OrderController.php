@@ -72,11 +72,18 @@ class OrderController extends Controller
         $totalPrice = $cartItems->sum(fn($item) => $item->itemPrice * $item->quantity);
 
         try {
-            DB::transaction(function () use ($userId, $cartItems, $totalPrice) {
+            DB::transaction(function () use ($userId, $cartItems, $totalPrice, $address) {
+                
+                // ★購入確定の現在日時をクリエイトするで！
+                $currentDateTime = now();
 
+                // 注文親データの登録
                 $orderId = DB::table('orders')->insertGetId([
-                    'user_id'     => $userId,
-                    'total_price' => $totalPrice,
+                    'user_id'          => $userId,
+                    'total_price'      => $totalPrice,
+                    'shipping_address' => $address,
+                    'created_at'       => $currentDateTime, // ★ここに現在日時をインサート！
+                    'updated_at'       => $currentDateTime, // 一緒にupdated_atも入れておくと親切やね
                 ]);
 
                 foreach ($cartItems as $item) {
@@ -84,11 +91,14 @@ class OrderController extends Controller
                         throw new \Exception($item->itemName . 'の在庫が足りまへん！');
                     }
 
+                    // 注文明細の登録
                     DB::table('order_details')->insert([
-                        'order_id'   => $orderId,
-                        'product_id' => $item->itemId,
-                        'quantity'   => $item->quantity,
-                        'price'      => $item->itemPrice,
+                        'order_id'         => $orderId,
+                        'product_id'       => $item->itemId,
+                        'quantity'         => $item->quantity,
+                        'price'            => $item->itemPrice,
+                        'created_at'       => $currentDateTime, // ★明細側にも同じ日時をシンク！
+                        'updated_at'       => $currentDateTime,
                     ]);
 
                     DB::table('products')
