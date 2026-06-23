@@ -48,6 +48,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // 商品一覧・編集・更新
     Route::get('/products', [adminproductsController::class, 'index'])->name('products.index');
+
+    Route::get('/products/create', [adminproductsController::class, 'create'])->name('products.create');
+    Route::post('/products/add', [adminproductsController::class, 'store'])->name('products.store');
+    
     Route::get('/products/{id}/edit', [adminproductsController::class, 'edit'])->name('products.edit');
     Route::put('/products/{id}', [adminproductsController::class, 'update'])->name('products.update');
 
