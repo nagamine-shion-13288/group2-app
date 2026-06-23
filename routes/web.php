@@ -3,11 +3,13 @@
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
-
 use App\Http\Controllers\admin\adminproductsController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\CartController;
 
+use App\Http\Controllers\admin\adminproductsController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\CartController;
 
 
 require __DIR__.'/product_route.php';
