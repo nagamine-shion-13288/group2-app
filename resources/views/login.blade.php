@@ -35,13 +35,13 @@
                 @csrf
 
                 <div class="field">
-                    <label for="id">ID</label>
-                    <input type="text" id="id" name="id" value="{{ old('id') }}">
+                    <label for="id">🌿 ID</label>
+                    <input type="text" id="id" name="id" value="{{ old('id') }}" placeholder="IDを入力">
                 </div>
 
                 <div class="field">
-                    <label for="password">パスワード</label>
-                    <input type="password" id="password" name="password">
+                    <label for="password">🌿 パスワード</label>
+                    <input type="password" id="password" name="password" placeholder="パスワードを入力">
                 </div>
 
                 <button type="submit" class="btn-login">ログイン</button>
@@ -51,7 +51,7 @@
                 <a href="/login/add">新規登録はこちら</a>
             </div>
 
-            </div>
+        </div>
 
     </div>
 </body>
