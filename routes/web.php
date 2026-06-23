@@ -7,10 +7,6 @@ use App\Http\Controllers\admin\adminproductsController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\CartController;
 
-use App\Http\Controllers\admin\adminproductsController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\CartController;
-
 
 require __DIR__.'/product_route.php';
 
