@@ -40,6 +40,10 @@ Route::get('/orderhistory', [OrderController::class, 'history'])->name('order.hi
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/products', [adminproductsController::class, 'index'])->name('products.index');
+
+    Route::get('/products/create', [adminproductsController::class, 'create'])->name('products.create');
+    Route::post('/products/add', [adminproductsController::class, 'store'])->name('products.store');
+    
     Route::get('/products/{id}/edit', [adminproductsController::class, 'edit'])->name('products.edit');
     Route::put('/products/{id}', [adminproductsController::class, 'update'])->name('products.update');
 });
