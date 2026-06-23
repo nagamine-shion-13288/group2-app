@@ -36,7 +36,9 @@
                     @if($product->pictureUrl)
                         <img src="{{ asset($product->pictureUrl) }}" class="product-img">
                     @else
-                        <div class="product-img" style="display:flex; align-items:center; justify-content:center; color:#fff; font-size:10px;">なし</div>
+                        <div class="product-img" style="color: #7f8c8d; font-size: 12px; font-weight: bold;">
+                            なし
+                        </div>
                     @endif
                 </td>
                 <td><strong>{{ $product->name }}</strong></td>
