@@ -1,0 +1,137 @@
+/* resources/css/pages/login.css */
+
+/* ログインページ専用のスタイル */
+.login-page {
+    min-height: 100vh;
+    background: #f4f1ea;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.login-page * {
+    box-sizing: border-box;
+}
+
+.login-page .container {
+    width: 100%;
+    max-width: 380px;
+    padding: 20px;
+}
+
+.login-page .card {
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.login-page .brand {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.login-page .brand h1 {
+    margin: 0 0 8px;
+    color: #1f3a5c;
+    font-size: 28px;
+}
+
+.login-page .brand p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* 成功・エラーボックス */
+.login-page .success-box {
+    background: #e6f4ea;
+    color: #137333;
+    padding: 10px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.login-page .error-box {
+    background: #ffecec;
+    color: #b00020;
+    padding: 10px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.login-page .error-box p {
+    margin: 0;
+}
+
+/* フォームフィールド */
+.login-page .field {
+    margin-bottom: 16px;
+}
+
+.login-page .field label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333;
+}
+
+.login-page .field input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* ボタン */
+.login-page .btn-login {
+    width: 100%;
+    padding: 12px;
+    background: #1f3a5c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.login-page .btn-login:hover {
+    background: #142a45;
+}
+
+/* リンクエリア */
+.login-page .link-area {
+    text-align: center;
+    margin-top: 16px;
+}
+
+.login-page .link-area a {
+    color: #1f3a5c;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.login-page .link-area a:hover {
+    text-decoration: underline;
+}
+
+.login-page .guest-link {
+    text-align: center;
+    margin-top: 16px;
+}
+
+.login-page .guest-link a {
+    font-size: 13px;
+    color: #888;
+    text-decoration: none;
+}
+
+.login-page .guest-link a:hover {
+    text-decoration: underline;
+}

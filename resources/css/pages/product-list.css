@@ -1,0 +1,164 @@
+/* resources/css/pages/product-list.css */
+
+/* アプリ全体のベース設定（一覧画面基準） */
+body {
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+/* 一覧ページ専用のレイアウト */
+.product-list-page .main-content {
+    padding: 120px 20px 40px 20px;
+}
+
+/* フィルター・ソートフォーム */
+.product-list-page .filter-form {
+    margin-bottom: 40px;
+    text-align: left;
+    background-color: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    display: inline-block;
+}
+
+.product-list-page .filter-form label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #4a5568;
+    margin-right: 10px;
+}
+
+.product-list-page .filter-form select {
+    padding: 8px 16px;
+    font-size: 14px;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
+}
+
+/* 商品グリッド（★最大幅を設定して4列を死守） */
+.product-list-page .product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px;
+    padding: 0;
+    margin: 0 auto; /* 中央寄せ */
+    list-style: none;
+    justify-content: center;
+    max-width: 980px; /* 5列目が並ばないように横幅を制限 */
+}
+
+/* 商品カード（元の大きさを完全にキープ） */
+.product-list-page .product-item {
+    width: 210px;
+    text-align: center;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-sizing: border-box; /* パディングを含めたサイズ計算に固定 */
+}
+
+.product-list-page .product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+}
+
+/* サムネイル画像ボックス */
+.product-list-page .image-box {
+    width: 100%;
+    height: 210px;
+    background-color: #edf2f7;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.product-list-page .image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-list-page .not-found-text {
+    color: #e53e3e;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* 商品テキスト情報 */
+.product-list-page .product-info {
+    padding: 5px 0;
+}
+
+.product-list-page .product-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2d3748;
+    margin-bottom: 8px;
+    height: 44px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-list-page .product-price {
+    font-size: 18px;
+    font-weight: 800;
+    color: #1a202c;
+}
+
+/* ページネーション */
+.product-list-page .pagination-wrapper {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.product-list-page .pagination-wrapper ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.product-list-page .pagination-wrapper li {
+    margin: 0 4px;
+}
+
+.product-list-page .pagination-wrapper a, 
+.product-list-page .pagination-wrapper span {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #4a5568;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.product-list-page .pagination-wrapper .active span {
+    background-color: #4a5568;
+    color: #fff;
+    border-color: #4a5568;
+}
+
+.product-list-page .pagination-wrapper .disabled span {
+    color: #a0aec0;
+    background-color: #edf2f7;
+    cursor: not-allowed;
+}
+
+.product-list-page .pagination-wrapper a:hover {
+    background-color: #edf2f7;
+}
