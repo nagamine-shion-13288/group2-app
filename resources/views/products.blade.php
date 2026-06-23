@@ -9,7 +9,7 @@
     @vite(['resources/css/app.css'])
 </head>
 
-<body>
+<body class="product-list-page">
 
     @include('layouts.header')
 
