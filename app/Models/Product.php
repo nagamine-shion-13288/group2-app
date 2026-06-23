@@ -21,4 +21,13 @@ public function shop()
     // 商品は特定の1つのショップに所属する
     return $this->belongsTo(Shop::class);
 }
+// 一括画面代入（Mass Assignment）の許可設定
+    protected $fillable = [
+        'shop_id', 
+        'name', 
+        'description', 
+        'category_id', 
+        'price', 
+        'stock'
+    ];
 }
