@@ -1,47 +1,47 @@
-* {
-    box-sizing: border-box;
-}
+/* resources/css/pages/account-add.css */
 
-body {
-    margin: 0;
+/* 新規アカウント登録ページ専用のスタイル */
+.account-add-page {
     min-height: 100vh;
     background: #f4f1ea;
     font-family: sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0;
 }
 
-.container {
+.account-add-page * {
+    box-sizing: border-box;
+}
+
+.account-add-page .container {
     width: 100%;
     max-width: 380px;
     padding: 20px;
 }
 
-.card {
+.account-add-page .card {
     background: #ffffff;
     padding: 32px;
     border-radius: 8px;
     border: 1px solid #ddd;
 }
 
-.brand {
+.account-add-page .brand {
     text-align: center;
     margin-bottom: 24px;
 }
 
-.brand h1 {
+.account-add-page .brand h1 {
     margin: 0 0 8px;
     color: #1f3a5c;
+    font-size: 24px;
+    font-weight: bold;
 }
 
-.brand p {
-    margin: 0;
-    font-size: 14px;
-    color: #666;
-}
-
-.error-box {
+/* エラーボックス */
+.account-add-page .error-box {
     background: #ffecec;
     color: #b00020;
     padding: 10px;
@@ -50,28 +50,33 @@ body {
     font-size: 14px;
 }
 
-.error-box p {
+.account-add-page .error-box p {
     margin: 0;
 }
 
-.field {
+/* フォームフィールド */
+.account-add-page .field {
     margin-bottom: 16px;
 }
 
-.field label {
+.account-add-page .field label {
     display: block;
     margin-bottom: 6px;
     font-weight: bold;
+    color: #333;
+    font-size: 14px;
 }
 
-.field input {
+.account-add-page .field input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 14px;
 }
 
-.btn-login {
+/* 登録ボタン */
+.account-add-page .btn-register {
     width: 100%;
     padding: 12px;
     background: #1f3a5c;
@@ -79,37 +84,26 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
 }
 
-.btn-login:hover {
+.account-add-page .btn-register:hover {
     background: #142a45;
 }
 
-.link-area {
+/* 戻るリンクエリア */
+.account-add-page .link-area {
     text-align: center;
     margin-top: 16px;
 }
 
-.link-area a {
+.account-add-page .link-area a {
     color: #1f3a5c;
     text-decoration: none;
+    font-size: 14px;
 }
 
-.link-area a:hover {
-    text-decoration: underline;
-}
-
-.guest-link {
-    text-align: center;
-    margin-top: 16px;
-}
-
-.guest-link a {
-    font-size: 13px;
-    color: #888;
-    text-decoration: none;
-}
-
-.guest-link a:hover {
+.account-add-page .link-area a:hover {
     text-decoration: underline;
 }

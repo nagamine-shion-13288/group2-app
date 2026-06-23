@@ -1,0 +1,181 @@
+/* resources/css/pages/cart.css */
+
+/* カート・購入確認・購入完了ページ共通のレイアウト */
+.cart-page .cart-container,
+.cart-checkout-page .cart-container,
+.cart-complete-page .cart-container {
+    max-width: 720px;
+    margin: 70px auto 0 auto; /* 💡 購入完了画面もヘッダーの分（70px）上に余白を確保 */
+    padding: 24px 16px;
+}
+
+.cart-page .cart-user,
+.cart-checkout-page .cart-user,
+.cart-complete-page .cart-user { 
+    font-size: 14px; 
+    color: #555; 
+    margin-bottom: 4px; 
+}
+
+.cart-complete-page .cart-container {
+    text-align: center; /* 購入完了画面のみ中央寄せ */
+}
+
+.cart-complete-page .cart-user {
+    text-align: left; /* ユーザー名だけは左寄せを維持 */
+}
+
+.cart-page .cart-title,
+.cart-checkout-page .cart-title { 
+    font-size: 22px; 
+    font-weight: bold; 
+    text-decoration: underline; 
+    text-align: center; 
+    margin-bottom: 24px; 
+}
+
+/* カートアイテム一覧（カート・購入確認共通） */
+.cart-page .cart-item,
+.cart-checkout-page .cart-item { 
+    display: flex; 
+    align-items: flex-start; 
+    gap: 16px; 
+    padding: 16px 0; 
+    border-bottom: 1px solid #e0e0e0; 
+}
+
+.cart-page .cart-item__image,
+.cart-checkout-page .cart-item__image { 
+    flex-shrink: 0; 
+    width: 96px; 
+    height: 96px; 
+    background: #ccc; 
+    border-radius: 4px; 
+    overflow: hidden; 
+}
+
+.cart-page .cart-item__image img,
+.cart-checkout-page .cart-item__image img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.cart-page .cart-item__image--placeholder,
+.cart-checkout-page .cart-item__image--placeholder { 
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: #fff; 
+    font-size: 13px; 
+    background: #aaa; 
+}
+
+.cart-page .cart-item__info,
+.cart-checkout-page .cart-item__info { 
+    flex: 1; 
+}
+
+.cart-page .cart-item__name,
+.cart-checkout-page .cart-item__name { 
+    font-size: 15px; 
+    margin-bottom: 6px; 
+}
+
+.cart-page .cart-item__price,
+.cart-checkout-page .cart-item__price { 
+    font-size: 14px; 
+    text-decoration: underline; 
+}
+
+.cart-page .cart-item__quantity,
+.cart-checkout-page .cart-item__quantity { 
+    text-decoration: none; 
+    margin-left: 16px; 
+    color: #333; 
+}
+
+/* フッター・ボタン関連（共通） */
+.cart-page .cart-footer,
+.cart-checkout-page .cart-footer { 
+    display: flex; 
+    justify-content: flex-end; 
+    align-items: center; 
+    gap: 24px; 
+    padding-top: 20px; 
+}
+
+.cart-page .cart-total,
+.cart-checkout-page .cart-total { 
+    font-size: 14px; 
+}
+
+.cart-page .cart-total__price,
+.cart-checkout-page .cart-total__price { 
+    text-decoration: underline; 
+    font-weight: bold; 
+}
+
+.cart-page .btn-primary,
+.cart-checkout-page .btn-primary,
+.cart-complete-page .btn-primary { 
+    display: inline-block; 
+    background: #333; 
+    color: #fff; 
+    padding: 8px 20px; 
+    border-radius: 4px; 
+    text-decoration: none; 
+    font-size: 14px; 
+    border: none;
+    cursor: pointer;
+}
+.cart-page .btn-primary:hover,
+.cart-checkout-page .btn-primary:hover,
+.cart-complete-page .btn-primary:hover { 
+    background: #555; 
+}
+
+.cart-complete-page .btn-primary {
+    margin-top: 32px;
+    padding: 10px 28px; /* 完了画面専用のボタンサイズに調整 */
+}
+
+/* ==========================================
+   購入確認画面 専用のスタイル
+   ========================================== */
+.cart-checkout-page .delivery-section { 
+    margin: 24px 0; 
+    padding: 16px; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+}
+.cart-checkout-page .delivery-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; }
+.cart-checkout-page .delivery-option { display: block; margin-bottom: 8px; font-size: 14px; cursor: pointer; }
+.cart-checkout-page .address-input { width: 100%; padding: 8px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; box-sizing: border-box; }
+.cart-checkout-page .btn-back-red { display: inline-block; background: #c0392b; color: #fff; padding: 8px 20px; border-radius: 4px; text-decoration: none; font-size: 14px; }
+.cart-checkout-page .btn-back-red:hover { background: #a93226; }
+
+/* ==========================================
+   購入完了画面 専用のスタイル
+   ========================================== */
+.cart-complete-page .complete-box { 
+    border: 1px solid #ddd; 
+    padding: 48px 24px; 
+    border-radius: 8px; 
+    margin-top: 40px; 
+    background: #fff; /* 背景色を白にして見やすく */
+}
+
+.cart-complete-page .complete-box h1 { 
+    font-size: 22px; 
+    font-weight: bold; 
+    margin: 0 0 16px 0; 
+}
+
+.cart-complete-page .complete-box p { 
+    color: #555; 
+    font-size: 14px; 
+    margin: 0;
+}
