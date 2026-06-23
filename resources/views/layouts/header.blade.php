@@ -128,6 +128,10 @@
     transition: transform 0.3s, opacity 0.3s;
 }
 
+.hamburger-btn.open span {
+    background-color: #fff; /* これで×ボタンの線が全部ホワイトになるで！ */
+}
+
 .hamburger-btn.open span:nth-child(1) {
     transform: translateY(9px) rotate(45deg);
 }
@@ -162,12 +166,44 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    width: 100%;
 }
 
 .sidebar-menu li {
     border-bottom: 1px solid #edf2f7;
+    padding: 8px 0;
+    box-sizing: border-box;
+    width: 100%;
 }
 
+.sidebar-logout-form {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar-menu .menu-link-btn {
+    display: block;
+    width: calc(100% - 30px);
+    margin: 0 auto;
+    padding: 15px 0; /* 左右のpaddingを0にしてtext-align: centerで中央に */
+    
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+.sidebar-menu .menu-link-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7); 
+}
 .sidebar-menu li a,
 .sidebar-menu li button {
     display: block;
@@ -262,24 +298,24 @@
 
 <nav class="sidebar-menu" id="sidebar-menu">
     <ul>
-        <li><a href="{{ url('/cart') }}">カート🛒</a></li>
+        <li><a href="{{ url('/cart') }}" class="menu-link-btn">カート🛒</a></li>
 
         @if (session()->has('userId'))
-            <li><a href="{{ route('order.history') }}">注文履歴</a></li>
-            <li><a href="{{ url('/account') }}">アカウント情報</a></li>
+            <li><a href="{{ route('order.history') }}" class="menu-link-btn">注文履歴</a></li>
+            <li><a href="{{ url('/account') }}" class="menu-link-btn">アカウント情報</a></li>
             <li>
                 <form action="{{ route('logout') }}"
                       method="POST"
                       class="logout-form"
                       onsubmit="return confirm('ログアウトしますか？')">
                     @csrf
-                    <button type="submit" class="logout-button">
+                    <button type="submit" class="menu-link-btn">
                         ログアウト
                     </button>
                 </form>
             </li>
         @else
-            <li><a href="{{ route('login') }}">ログイン</a></li>
+            <li><a href="{{ route('login') }}" class="menu-link-btn">ログイン</a></li>
         @endif
     </ul>
 </nav>
