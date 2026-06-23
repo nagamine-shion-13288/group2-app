@@ -7,6 +7,10 @@ use App\Http\Controllers\admin\adminproductsController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\CartController;
 
+use App\Http\Controllers\admin\adminproductsController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\CartController;
+
 
 require __DIR__.'/product_route.php';
 
@@ -37,9 +41,6 @@ Route::post('/complete', [OrderController::class, 'complete'])->name('order.comp
 Route::get('/orderhistory', [OrderController::class, 'history'])->name('order.history');
 
 
-// ==========================================
-// 管理画面（admin）関連のルーティング（1つに集約）
-// ==========================================
 Route::prefix('admin')->name('admin.')->group(function () {
     
     // 💡 ポイント：{id} を含むルートよりも「上に」create を書くことで、URLの衝突を防ぎます
@@ -55,3 +56,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/products/{id}', [adminproductsController::class, 'update'])->name('products.update');
 
 });
+
