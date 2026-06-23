@@ -39,39 +39,39 @@
             カート🛒
         </a>
     </div>
-</header>
 
-<button class="hamburger-btn" id="menu-btn">
-    <span></span>
-    <span></span>
-    <span></span>
-</button>
+    <button class="hamburger-btn" id="menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
 
-<div class="menu-overlay" id="menu-overlay"></div>
+    <div class="menu-overlay" id="menu-overlay"></div>
 
 <nav class="sidebar-menu" id="sidebar-menu">
-    <ul>
-        <li><a href="{{ url('/cart') }}" class="menu-link-btn">カート🛒</a></li>
+        <ul>
+            <li><a href="{{ url('/cart') }}" class="menu-link-btn">カート🛒</a></li>
 
-        @if (session()->has('userId'))
-            <li><a href="{{ route('order.history') }}" class="menu-link-btn">注文履歴</a></li>
-            <li><a href="{{ url('/account') }}" class="menu-link-btn">アカウント情報</a></li>
-            <li>
-                <form action="{{ route('logout') }}"
-                      method="POST"
-                      class="logout-form"
-                      onsubmit="return confirm('ログアウトしますか？')">
-                    @csrf
-                    <button type="submit" class="menu-link-btn">
-                        ログアウト
-                    </button>
-                </form>
-            </li>
-        @else
-            <li><a href="{{ route('login') }}" class="menu-link-btn">ログイン</a></li>
-        @endif
-    </ul>
-</nav>
+            @if (session()->has('userId'))
+                <li><a href="{{ route('order.history') }}" class="menu-link-btn">注文履歴</a></li>
+                <li><a href="{{ url('/account') }}" class="menu-link-btn">アカウント情報</a></li>
+                <li>
+                    <form action="{{ route('logout') }}"
+                          method="POST"
+                          class="logout-form"
+                          onsubmit="return confirm('ログアウトしますか？')">
+                        @csrf
+                        <button type="submit" class="menu-link-btn">
+                            ログアウト
+                        </button>
+                    </form>
+                </li>
+            @else
+                <li><a href="{{ route('login') }}" class="menu-link-btn">ログイン</a></li>
+            @endif
+        </ul>
+    </nav>
+</header>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
