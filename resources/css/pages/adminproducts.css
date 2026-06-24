@@ -73,10 +73,11 @@ td {
 
 .col-id { width: 8%; text-align: center; }
 .col-img { width: 12%; text-align: center; }
-.col-name { width: 40%; text-align: left; }
-.col-price { width: 15%; text-align: right; }
+.col-name { width: 30%; text-align: left; }
+.col-category { width: 15%; text-align: center; }
+.col-price { width: 13%; text-align: right; }
 .col-stock { width: 10%; text-align: center; }
-.col-action { width: 15%; text-align: center; }
+.col-action { width: 12%; text-align: center; }
 
 tbody tr {
     transition: background 0.2s ease;
@@ -98,16 +99,11 @@ tbody tr:hover {
     box-sizing: border-box;
 }
 
-
-/* ボタンを配置するエリアの余白 */
 .admin-actions {
     margin-bottom: 20px;
     text-align: right;
 }
 
-/* ===================================================
-   ★ボタンの共通デザイン（ベース設定）
-=================================================== */
 .btn-base {
     display: inline-block;
     padding: 10px 16px;
@@ -121,19 +117,12 @@ tbody tr:hover {
     box-sizing: border-box;
 }
 
-/* ボタンにマウスを乗せたときの共通エフェクト */
 .btn-base:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     opacity: 0.9;
 }
 
-
-/* ===================================================
-   🎨 各ボタンの「色」と「サイズ変形」の個別定義
-=================================================== */
-
-/* 緑色のボタン（新規商品追加用） */
 .btn-green {
     background: #28a745;
     color: #ffffff;
@@ -142,16 +131,12 @@ tbody tr:hover {
     background: #218838;
 }
 
-/* 紺色のグラデーションボタン（元の「編集」「注文一覧」用） */
 .btn-navy {
     background: linear-gradient(135deg, #34495e, #2c3e50);
-
     color: #ffffff;
 }
 
-/* テーブル内のボタン用（小サイズ化アジャスト） */
 .btn-sm {
     padding: 6px 12px;
     font-size: 13px;
-
 }
