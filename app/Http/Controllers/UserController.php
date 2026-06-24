@@ -24,6 +24,7 @@ class UserController extends Controller
     'name' => 'required',
     'address' => 'required',
     'user_phone' => 'required',
+    'email' => 'required|email',
     ], [
     'login_id.required' => 'ログインIDを入力してください。',
     'login_id.unique' => 'このログインIDは既に使われています。',
@@ -32,6 +33,8 @@ class UserController extends Controller
     'name.required' => '氏名を入力してください。',
     'address.required' => '住所を入力してください。',
     'user_phone.required' => '電話番号を入力してください。',
+    'email.required' => 'メールアドレスを入力してください。',
+    'email.email' => '有効なメールアドレスを入力してください。',
     ]);
 
         Account::create([
@@ -40,6 +43,7 @@ class UserController extends Controller
             'name' => $request->name,
             'address' => $request->address,
             'user_phone' => $request->user_phone,
+            'email' => $request->email,
         ]);
 
         return redirect('/login')
