@@ -36,7 +36,6 @@ class adminproductsController extends Controller
     // ② 編集画面を出す
     public function edit($id)
     {
-        session(['shopId' => 1]); 
         $shopId = session('shopId');
 
         // 画像のURLも一緒にゲットするために leftJoin するで！
@@ -51,7 +50,7 @@ class adminproductsController extends Controller
             ->first();
 
         if (!$product) {
-            return redirect()->route('admin.products.index')->withErrors('商品が見つからんか、権限がありまへん。');
+            return redirect()->route('admin.products.index')->withErrors('商品が見つからんか、権限がありません');
         }
 
         $categories = DB::table('categories')->get();
@@ -128,7 +127,7 @@ class adminproductsController extends Controller
             return redirect()->route('admin.products.index')->with('success', '商品と画像をアップデートしました！');
 
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors('更新に失敗したで：' . $e->getMessage())->withInput();
+            return redirect()->back()->withErrors('更新に失敗しました：' . $e->getMessage())->withInput();
         }
     }
     // ④ 新規登録画面を表示するで！
