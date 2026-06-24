@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\admin\adminproductsController; 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ShopManagerController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+
 
 // 外部ルートファイルの読み込み
 require __DIR__.'/product_route.php';
@@ -36,6 +38,18 @@ Route::get('/cart/check', [OrderController::class, 'confirm'])->name('cart.check
 Route::post('/complete', [OrderController::class, 'complete'])->name('order.complete');
 Route::get('/orderhistory', [OrderController::class, 'history'])->name('order.history');
 
+//管理者アカウント作成
+Route::get('/shopManager/add', [ShopManagerController::class, 'showAddForm'])
+    ->name('shopManager.add');
+
+Route::post('/shopManager/add', [ShopManagerController::class, 'add'])
+    ->name('shopManager.add.post');
+
+//管理者ログイン
+
+Route::get('/admin/login',[ShopManagerController::class, 'showLoginForm'])->name('shopManager.login');
+
+Route::post('/admin/login',[ShopManagerController::class, 'login'])->name('shopManager.login.post');
 
 // ==========================================
 // 管理画面（admin）関連のルーティング

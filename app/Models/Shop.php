@@ -9,9 +9,15 @@ class Shop extends Model
 {
     use HasFactory;
 
-    // 💡 1つのショップは、たくさんの商品（Products）を持っています
+    protected $table = 'shops';
+
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function managers()
+    {
+        return $this->hasMany(ShopManager::class, 'shop_id', 'id');
     }
 }
