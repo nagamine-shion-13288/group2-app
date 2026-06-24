@@ -55,6 +55,8 @@ class ShopManagerController extends Controller
                 'managerId' => $manager->id,
                 'managerName' => $manager->name,
                 'shopId' => $manager->shop_id,
+                'shopName' => $manager->shop->name,
+
             ]);
 
             return redirect()->route('admin.products.index');
