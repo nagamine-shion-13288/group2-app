@@ -8,7 +8,7 @@ body {
 
 /* 一覧ページ専用のレイアウト */
 .product-list-page .main-content {
-    padding: 120px 20px 40px 20px;
+    padding: 55px 20px 40px 20px;
 }
 
 /* フィルター・ソートフォーム */
@@ -161,4 +161,12 @@ body {
 
 .product-list-page .pagination-wrapper a:hover {
     background-color: #edf2f7;
+}
+
+.marquee-container {
+    overflow: hidden;
+    background: linear-gradient(90deg, #1a6b3a, #2d8f52, #1a6b3a);
+    padding: 10px 0;
+    margin-bottom: 16px;
+    border-radius: 8px;
 }
