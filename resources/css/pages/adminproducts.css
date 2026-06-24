@@ -130,3 +130,30 @@ tbody tr:hover {
     box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
     opacity: 0.9;
 }
+
+/* --- 商品追加ボタン用のスタイル --- */
+
+/* ボタンを配置するエリアの余白 */
+.admin-actions {
+    margin-bottom: 20px;
+    text-align: right; /* ボタンを右寄せにしたい場合はこれ、左寄せなら left にしてな */
+}
+
+/* 追加ボタン自体のデザイン（緑色ベースで目立たせるのがおすすめ！） */
+.btn-add {
+    display: inline-block;
+    background-color: #28a745;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.15s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* ボタンにマウスを乗せたときの動き */
+.btn-add:hover {
+    background-color: #218838;
+}

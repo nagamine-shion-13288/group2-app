@@ -10,6 +10,10 @@
 <div class="admin-box">
     <h1>商品一覧</h1>
 
+    <div class="admin-actions">
+        <a href="{{ route('admin.products.create') }}" class="btn-add">+ 新規商品を追加する</a>
+    </div>
+
     @if(session('success'))
         <div class="alert-success">{{ session('success') }}</div>
     @endif

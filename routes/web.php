@@ -3,7 +3,7 @@
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\admin\adminproductsController; // 他のメンバーが作ったコントローラを活かす
+use App\Http\Controllers\admin\adminproductsController; 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 
@@ -51,8 +51,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // 2. 【他メンバー作成の商品追加・管理】
     // 💡 重要：{id} を含む編集ルートよりも「上に」具体的なURL（/products や /products/create 等があればそれ）を配置して衝突を防ぎます
     Route::get('/products', [adminproductsController::class, 'index'])->name('products.index');
-    
-    // 商品編集・更新ルート（{id} が入るルートは一番下に配置）
     Route::get('/products/{id}/edit', [adminproductsController::class, 'edit'])->name('products.edit');
     Route::put('/products/{id}', [adminproductsController::class, 'update'])->name('products.update');
 
