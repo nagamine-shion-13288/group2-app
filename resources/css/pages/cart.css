@@ -179,3 +179,7 @@
     font-size: 14px; 
     margin: 0;
 }
+
+.cart-empty{
+    text-align: center;
+}
