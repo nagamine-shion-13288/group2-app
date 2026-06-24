@@ -50,6 +50,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // 2. 【他メンバー作成の商品追加・管理】
     // 💡 重要：{id} を含む編集ルートよりも「上に」具体的なURL（/products や /products/create 等があればそれ）を配置して衝突を防ぎます
+    Route::get('/products/create', [adminproductsController::class, 'create'])->name('products.create');
+    Route::post('/products', [adminproductsController::class, 'store'])->name('products.store');
     Route::get('/products', [adminproductsController::class, 'index'])->name('products.index');
     Route::get('/products/{id}/edit', [adminproductsController::class, 'edit'])->name('products.edit');
     Route::put('/products/{id}', [adminproductsController::class, 'update'])->name('products.update');
