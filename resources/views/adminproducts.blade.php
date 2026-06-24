@@ -8,10 +8,16 @@
 <body>
 
 <div class="admin-box">
+    <div style="font-size: 14px; color: #7f8c8d; margin-bottom: 5px; font-weight: bold;">
+        店舗：{{ session('shopName', '未設定のショップ') }}
+    </div>
+
     <h1>商品一覧</h1>
 
     <div class="admin-actions">
-        <a href="{{ route('admin.products.create') }}" class="btn-add">+ 新規商品を追加する</a>
+        <a href="{{ route('admin.products.create') }}" class="btn-base btn-green">+ 新規商品を追加する</a>
+        
+        <a href="{{ route('admin.orders.index') }}" class="btn-base btn-green" style="margin-left: 10px;">📋 注文管理一覧を見る</a>
     </div>
 
     @if(session('success'))
@@ -45,11 +51,13 @@
                         </div>
                     @endif
                 </td>
-                <td style="width: 40%; text-align: left; padding: 16px; vertical-align: middle; border-bottom: 1px solid #eaeded; color: #2c3e50; font-size: 15px; word-wrap: break-word; overflow-wrap: break-word;"><strong>{{ $product->name }}</strong></td>
-                <td style="width: 15%; text-align: right; padding: 16px; vertical-align: middle; border-bottom: 1px solid #eaeded; color: #2c3e50; font-size: 15px; word-wrap: break-word; overflow-wrap: break-word;">¥{{ number_format($product->price) }}</td>
-                <td style="width: 10%; text-align: center; padding: 16px; vertical-align: middle; border-bottom: 1px solid #eaeded; color: #2c3e50; font-size: 15px; word-wrap: break-word; overflow-wrap: break-word;">{{ $product->stock }} 個</td>
-                <td style="width: 15%; text-align: center; padding: 16px; vertical-align: middle; border-bottom: 1px solid #eaeded; color: #2c3e50; font-size: 15px; word-wrap: break-word; overflow-wrap: break-word;">
-                    <a href="{{ route('admin.products.edit', $product->id) }}" class="btn-edit">編集する</a>
+
+                <td><strong>{{ $product->name }}</strong></td>
+                <td>¥{{ number_format($product->price) }}</td>
+                <td>{{ $product->stock }} 個</td>
+                <td>
+                    <a href="{{ route('admin.products.edit', $product->id) }}" class="btn-base btn-navy btn-sm">編集する</a>
+
                 </td>
             </tr>
             @endforeach
