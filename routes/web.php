@@ -67,6 +67,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/products/create', [adminproductsController::class, 'create'])->name('products.create');
     Route::post('/products', [adminproductsController::class, 'store'])->name('products.store');
     Route::get('/products', [adminproductsController::class, 'index'])->name('products.index');
+
+    // ★ここを追加！新規商品追加画面を出すルート（最優先で上に置く！）
+    Route::get('/products/create', [adminproductsController::class, 'create'])->name('products.create');
+    
+    // ★ここを追加！新規登録データを保存（ポスト）するルート
+    Route::post('/products', [adminproductsController::class, 'store'])->name('products.store');
     Route::get('/products/{id}/edit', [adminproductsController::class, 'edit'])->name('products.edit');
     Route::put('/products/{id}', [adminproductsController::class, 'update'])->name('products.update');
 
