@@ -3,13 +3,13 @@
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\admin\adminproductsController;
-use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\admin\adminproductsController; 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopManagerController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 
 
-
+// 外部ルートファイルの読み込み
 require __DIR__.'/product_route.php';
 
 Route::get('/', function () {
@@ -51,23 +51,21 @@ Route::get('/admin/login',[ShopManagerController::class, 'showLoginForm'])->name
 
 Route::post('/admin/login',[ShopManagerController::class, 'login'])->name('shopManager.login.post');
 
+// ==========================================
+// 管理画面（admin）関連のルーティング
+// ==========================================
 Route::prefix('admin')->name('admin.')->group(function () {
     
-    // 💡 ポイント：{id} を含むルートよりも「上に」create を書くことで、URLの衝突を防ぎます
-    // 商品登録画面の表示 (URL: /admin/products/create)
-    Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
-    
-    // 商品登録処理 (URL: /admin/products)
-    Route::post('products', [ProductController::class, 'store'])->name('products.store');
+    // 1. 【注文管理】
+    // 注文一覧画面 (URL: /admin/orders)
+    Route::get('orders', [AdminOrderController::class, 'index'])->name('orders.index');
+    // 配送ステータス更新 (URL: /admin/order-details/{id}/status)
+    Route::patch('order-details/{id}/status', [AdminOrderController::class, 'updateStatus'])->name('orders.updateStatus');
 
-    // 商品一覧・編集・更新
+    // 2. 【他メンバー作成の商品追加・管理】
+    // 💡 重要：{id} を含む編集ルートよりも「上に」具体的なURL（/products や /products/create 等があればそれ）を配置して衝突を防ぎます
     Route::get('/products', [adminproductsController::class, 'index'])->name('products.index');
-
-    Route::get('/products/create', [adminproductsController::class, 'create'])->name('products.create');
-    Route::post('/products/add', [adminproductsController::class, 'store'])->name('products.store');
-    
     Route::get('/products/{id}/edit', [adminproductsController::class, 'edit'])->name('products.edit');
     Route::put('/products/{id}', [adminproductsController::class, 'update'])->name('products.update');
 
 });
-
