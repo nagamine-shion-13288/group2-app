@@ -8,10 +8,16 @@
 <body>
 
 <div class="admin-box">
+    <div style="font-size: 14px; color: #7f8c8d; margin-bottom: 5px; font-weight: bold;">
+        店舗：{{ session('shopName', '未設定のショップ') }}
+    </div>
+
     <h1>商品一覧</h1>
 
     <div class="admin-actions">
-        <a href="{{ route('admin.products.create') }}" class="btn-add">+ 新規商品を追加する</a>
+        <a href="{{ route('admin.products.create') }}" class="btn-base btn-green">+ 新規商品を追加する</a>
+        
+        <a href="{{ route('admin.orders.index') }}" class="btn-base btn-green" style="margin-left: 10px;">📋 注文管理一覧を見る</a>
     </div>
 
     @if(session('success'))
@@ -49,7 +55,7 @@
                 <td>¥{{ number_format($product->price) }}</td>
                 <td>{{ $product->stock }} 個</td>
                 <td>
-                    <a href="{{ route('admin.products.edit', $product->id) }}" class="btn-edit">編集する</a>
+                    <a href="{{ route('admin.products.edit', $product->id) }}" class="btn-base btn-navy btn-sm">編集する</a>
                 </td>
             </tr>
             @endforeach
