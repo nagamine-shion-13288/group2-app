@@ -27,35 +27,37 @@
         <div class="alert-error">{{ $errors->first() }}</div>
     @endif
 
-    <table>
+    <table style="width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 15px; table-layout: fixed;">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>画像</th>
-                <th>商品名</th>
-                <th>価格</th>
-                <th>在庫数</th>
-                <th>アクション</th>
+                <th style="width: 8%; text-align: center; background: #f8f9fa; color: #7f8c8d; font-weight: 600; text-transform: uppercase; font-size: 13px; padding: 16px; border-bottom: 2px solid #eaeded;">ID</th>
+                <th style="width: 12%; text-align: center; background: #f8f9fa; color: #7f8c8d; font-weight: 600; text-transform: uppercase; font-size: 13px; padding: 16px; border-bottom: 2px solid #eaeded;">画像</th>
+                <th style="width: 40%; text-align: left; background: #f8f9fa; color: #7f8c8d; font-weight: 600; text-transform: uppercase; font-size: 13px; padding: 16px; border-bottom: 2px solid #eaeded;">商品名</th>
+                <th style="width: 15%; text-align: right; background: #f8f9fa; color: #7f8c8d; font-weight: 600; text-transform: uppercase; font-size: 13px; padding: 16px; border-bottom: 2px solid #eaeded;">価格</th>
+                <th style="width: 10%; text-align: center; background: #f8f9fa; color: #7f8c8d; font-weight: 600; text-transform: uppercase; font-size: 13px; padding: 16px; border-bottom: 2px solid #eaeded;">在庫数</th>
+                <th style="width: 15%; text-align: center; background: #f8f9fa; color: #7f8c8d; font-weight: 600; text-transform: uppercase; font-size: 13px; padding: 16px; border-bottom: 2px solid #eaeded;">アクション</th>
             </tr>
         </thead>
         <tbody>
             @foreach($products as $product)
             <tr>
-                <td>{{ $product->id }}</td>
-                <td>
+                <td style="width: 8%; text-align: center; padding: 16px; vertical-align: middle; border-bottom: 1px solid #eaeded; color: #2c3e50; font-size: 15px; word-wrap: break-word; overflow-wrap: break-word;">{{ $product->id }}</td>
+                <td style="width: 12%; text-align: center; padding: 16px; vertical-align: middle; border-bottom: 1px solid #eaeded; color: #2c3e50; font-size: 15px; word-wrap: break-word; overflow-wrap: break-word;">
                     @if($product->pictureUrl)
-                        <img src="{{ asset($product->pictureUrl) }}" class="product-img">
+                        <img src="{{ asset($product->pictureUrl) }}" class="product-img" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background: #e5e8e8; display: inline-block;">
                     @else
-                        <div class="product-img" style="color: #7f8c8d; font-size: 12px; font-weight: bold;">
+                        <div class="product-img" style="width: 60px; height: 60px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background: #e5e8e8; display: inline-flex; align-items: center; justify-content: center; color: #7f8c8d; font-size: 12px; font-weight: bold; margin: 0 auto;">
                             なし
                         </div>
                     @endif
                 </td>
+
                 <td><strong>{{ $product->name }}</strong></td>
                 <td>¥{{ number_format($product->price) }}</td>
                 <td>{{ $product->stock }} 個</td>
                 <td>
                     <a href="{{ route('admin.products.edit', $product->id) }}" class="btn-base btn-navy btn-sm">編集する</a>
+
                 </td>
             </tr>
             @endforeach
