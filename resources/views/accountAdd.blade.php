@@ -52,7 +52,12 @@
                         <label>住所</label>
                         <input type="text" name="address" value="{{ old('address') }}" placeholder="東京都渋谷区神南1-19-11">
                     </div>
-
+                    
+                     <div class="field">
+                        <label>メールアドレス</label>
+                        <input type="text" name="email" value="{{ old('email') }}" placeholder="example@example.com">
+                    </div>
+                    
                     <div class="field">
                         <label>電話番号</label>
                         <input type="text" name="user_phone" value="{{ old('user_phone') }}" placeholder="090-1234-5678">
