@@ -63,11 +63,14 @@ body {
     gap: 8px;
 }
 
+/* 検索欄の背景を確実に「白」に固定 */
 .search-box {
     width: 300px;
     padding: 8px 12px;
     border: 1px solid #cccccc;
     border-radius: 5px;
+    background-color: #ffffff !important;
+    color: #333333 !important;
 }
 
 .search-button {
@@ -143,7 +146,7 @@ body {
 }
 
 .hamburger-btn.open span {
-    background-color: #fff; /* ×ボタンの線をホワイトにする */
+    background-color: #fff;
 }
 
 .hamburger-btn.open span:nth-child(1) {
@@ -165,14 +168,18 @@ body {
     left: -260px;
     width: 260px;
     height: 100%;
-    background-image: url('/images/header/つた.jpg');
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     z-index: 1900;
     transition: left 0.3s ease;
     padding-top: 80px;
     box-sizing: border-box;
+    
+    /* 💡 【修正】CSSファイルの位置からみた『正しい相対パス』で指定します */
+    background-image: url('../../../public/images/header/ivy.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
-
 .sidebar-menu.open {
     left: 0;
 }
@@ -185,7 +192,7 @@ body {
 }
 
 .sidebar-menu li {
-    border-bottom: 1px solid #edf2f7;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* 背景に馴染む薄い境界線 */
     padding: 8px 0;
     box-sizing: border-box;
     width: 100%;

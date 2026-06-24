@@ -1,0 +1,141 @@
+/* 全体のベース設定 */
+body {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    margin: 0;
+    padding: 40px 20px;
+    background: #f4f7f6;
+    color: #333;
+}
+
+/* フォームを囲むボックス */
+.form-box {
+    max-width: 650px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* タイトル */
+h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+/* 入力グループ */
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #34495e;
+    font-size: 14px;
+}
+
+/* 入力フォーム本体（インプット、セレクト、テキストエリア） */
+.form-control {
+    width: 100%;
+    padding: 12px 14px;
+    box-sizing: border-box;
+    border: 1px solid #d5dbdb;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #fcfcfc;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+/* フォーカスした時（入力中）に青いリングが綺麗に光るで！ */
+.form-control:focus {
+    border-color: #3498db;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+    outline: none;
+}
+
+textarea.form-control {
+    height: 140px;
+    resize: vertical;
+}
+
+/* 現在の画像エリア */
+.current-img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #eaeded;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin-bottom: 12px;
+    display: block;
+}
+
+/* ファイル選択ボタン周り */
+input[type="file"] {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+/* エラーメッセージ */
+.alert-error {
+    background: #fadbd8;
+    color: #cd6155;
+    padding: 14px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* ボタンの配置エリア */
+div[style*="margin-top: 24px"] {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 35px !important;
+}
+
+/* 「変更をセーブする」ボタン */
+.btn-submit {
+    background: linear-gradient(135deg, #2ecc71, #27ae60); /* 鮮やかなグリーングラデ */
+    color: #ffffff;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: 0 3px 8px rgba(46, 204, 113, 0.2);
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+    opacity: 0.95;
+}
+
+/* 「戻る」ボタン */
+.btn-cancel {
+    background: #bdc3c7;
+    color: #ffffff;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+    background: #95a5a6;
+}

@@ -9,12 +9,47 @@
     @vite(['resources/css/app.css'])
 </head>
 
-<body>
+<body class="product-list-page">
 
     @include('layouts.header')
 
     <div class="product-list-page">
         <main class="main-content">
+            
+            <div style="overflow:hidden; background:linear-gradient(90deg,#1a6b3a,#2d8f52,#1a6b3a); padding:10px 0;">
+                <div id="marquee-wrap" style="display:flex; white-space:nowrap;">
+                    <span id="marquee-track" style="display:inline-block; font-size:14px; font-weight:bold; color:#fff;">
+                        　🎉 1万円以上のご購入で配送料無料キャンペーン実施中！ 🌿　&nbsp;&nbsp;&nbsp;　🐱 毎日新しい子が入荷中！ 🐶　&nbsp;&nbsp;&nbsp;　🐩 冷やし中華はじめました！ 😼　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                </div>
+            </div>
+
+            <script>
+            (function() {
+                const wrap = document.getElementById('marquee-wrap');
+                const track = document.getElementById('marquee-track');
+
+                for (let i = 0; i < 5; i++) {
+                    const clone = track.cloneNode(true);
+                    clone.removeAttribute('id');
+                    wrap.appendChild(clone);
+                }
+
+                let pos = 0;
+                const speed = 1.0;
+                const unit = track.offsetWidth;
+
+                function animate() {
+                    pos -= speed;
+                    if (Math.abs(pos) >= unit) {
+                        pos += unit;
+                    }
+                    wrap.style.transform = `translateX(${pos}px)`;
+                    requestAnimationFrame(animate);
+                }
+                requestAnimationFrame(animate);
+            })();
+            </script>
 
             <div class="filter-form">
                 <form action="{{ url('/products') }}" method="GET" id="search-form">
