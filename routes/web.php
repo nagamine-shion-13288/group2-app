@@ -38,6 +38,9 @@ Route::post('/shopManager/add', [ShopManagerController::class, 'add'])->name('sh
 Route::get('/admin/login',[ShopManagerController::class, 'showLoginForm'])->name('shopManager.login');
 Route::post('/admin/login',[ShopManagerController::class, 'login'])->name('shopManager.login.post');
 
+Route::get('/login/add', [UserController::class, 'showAccountAddForm'])->name('account.add');
+Route::post('/login/add', [UserController::class, 'accountAdd'])->name('account.store');
+
 Route::prefix('admin')->name('admin.')->group(function () {
     
     Route::get('orders', [AdminOrderController::class, 'index'])->name('orders.index');

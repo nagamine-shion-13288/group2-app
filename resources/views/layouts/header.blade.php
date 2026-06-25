@@ -36,6 +36,7 @@
 
         @else
             <a href="{{ route('login') }}" class="login-link">ログイン</a>
+            <a href="{{ url('/login/add') }}" class="register-link">新規登録</a>
         @endif
 
         <a href="{{ url('/cart') }}">
@@ -71,6 +72,7 @@
                 </li>
             @else
                 <li><a href="{{ route('login') }}" class="menu-link-btn">ログイン</a></li>
+                <li><a href="{{ url('/login/add') }}" class="menu-link-btn">新規登録</a></li>
             @endif
         </ul>
     </nav>
