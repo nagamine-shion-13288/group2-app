@@ -77,26 +77,38 @@ class adminproductsController extends Controller
         $shopId = session('shopId');
 
         $request->validate([
-            'name'        => 'required|string|max:255',
-            'price'       => 'required|numeric|min:0',
-            'stock'       => 'required|integer|min:0',
-            'category_id' => 'required|integer',
-            'description' => 'nullable|string',
+            'name'          => 'required|string|max:255',
+            'price'         => 'required|numeric|min:0',
+            'stock'         => 'required|integer|min:0',
+            'category_id'   => 'required|integer',
+            'description'   => 'nullable|string',
             'product_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'voice_file'    => 'nullable|mimes:mp3|max:5120',
         ]);
 
         try {
+            DB::beginTransaction();
+
+            $updateData = [
+                'name'        => $request->name,
+                'price'       => $request->price,
+                'stock'       => $request->stock,
+                'category_id' => $request->category_id,
+                'description' => $request->description,
+                'updated_at'  => now(),
+            ];
+
+            if ($request->hasFile('voice_file')) {
+                $audioFile = $request->file('voice_file');
+                $audioName = $audioFile->getClientOriginalName();
+                $audioFile->move(public_path('sounds'), $audioName);
+                $updateData['voice_url'] = 'sounds/' . $audioName;
+            }
+
             DB::table('products')
                 ->where('id', $id)
                 ->where('shop_id', $shopId)
-                ->update([
-                    'name'        => $request->name,
-                    'price'       => $request->price,
-                    'stock'       => $request->stock,
-                    'category_id' => $request->category_id,
-                    'description' => $request->description,
-                    'updated_at'  => now(),
-                ]);
+                ->update($updateData);
 
             if ($request->hasFile('product_image')) {
                 $file = $request->file('product_image');
@@ -124,9 +136,11 @@ class adminproductsController extends Controller
                 }
             }
 
-            return redirect()->route('admin.products.index')->with('success', '商品と画像をアップデートしました');
+            DB::commit();
+            return redirect()->route('admin.products.index')->with('success', '商品、画像、ボイスをアップデートしました');
 
         } catch (\Exception $e) {
+            DB::rollBack();
             return redirect()->back()->withErrors('更新に失敗しました：' . $e->getMessage())->withInput();
         }
     }

@@ -34,6 +34,11 @@
         </div>
 
         <div class="form-group">
+            <label for="voice_file">鳴き声（ボイス）をチェンジする（MP3ファイルを選択）</label>
+            <input type="file" id="voice_file" name="voice_file" accept="audio/mp3, audio/mpeg">
+        </div>
+
+        <div class="form-group">
             <label>商品名</label>
             <input type="text" name="name" class="form-control" value="{{ old('name', $product->name) }}">
         </div>
