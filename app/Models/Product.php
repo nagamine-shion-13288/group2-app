@@ -23,6 +23,7 @@ public function shop()
         'description', 
         'category_id', 
         'price', 
-        'stock'
+        'stock',
+        'voice_url',
     ];
 }
