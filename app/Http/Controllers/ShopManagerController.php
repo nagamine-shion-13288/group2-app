@@ -66,4 +66,17 @@ class ShopManagerController extends Controller
             ->with('error', 'ログインIDまたはパスワードが違います')
             ->withInput();
     }
+
+    public function logout()
+    {
+        session()->forget([
+            'managerId',
+            'managerName',
+            'shopId',
+            'shopName'
+        ]);
+
+        return redirect()->route('shopManager.login')
+            ->with('success', 'ログアウトしました');
+    }
 }
