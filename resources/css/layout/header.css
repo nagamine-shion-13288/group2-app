@@ -250,3 +250,11 @@ body {
     display: block;
     opacity: 1;
 }
+
+.header-nav a.login-link {
+    color: red !important;
+}
+
+.sidebar-menu .login-link-red {
+    color: red !important;
+}

@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>管理者商品編集</title>
+    <title>管理者 - 商品編集</title>
     @vite('resources/css/pages/adminproductsupdate.css')
 </head>
 <body>

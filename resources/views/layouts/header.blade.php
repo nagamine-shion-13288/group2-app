@@ -33,6 +33,9 @@
                     ログアウト
                 </button>
             </form>
+
+        @else
+            <a href="{{ route('login') }}" class="login-link">ログイン</a>
         @endif
 
         <a href="{{ url('/cart') }}">
