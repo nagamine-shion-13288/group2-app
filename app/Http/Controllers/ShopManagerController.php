@@ -22,7 +22,7 @@ class ShopManagerController extends Controller
             'shop_id' => 'required|exists:shops,id',
             'login_id' => 'required|max:50|unique:shop_managers,login_id',
             'name' => 'required|max:100',
-            'password' => 'required|min:8',
+            'password' => 'required',
         ]);
 
         ShopManager::create([
