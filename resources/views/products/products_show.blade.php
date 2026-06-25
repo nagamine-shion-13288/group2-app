@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $product->name }} - 商品詳細</title>
     <link rel="icon" type="image/png" href="{{ asset('D.png?v=1') }}">
-    
+
     @vite(['resources/css/app.css'])
 </head>
 <body>
@@ -26,7 +26,7 @@
                     <div class="product-image--placeholder">画像</div>
                 @endif
             </div>
-            
+
             <div class="product-info">
                 @if($product->shop)
                     <p class="shop-name">{{ $product->shop->name }}</p>
@@ -49,7 +49,6 @@
 
                 @if ($product->stock > 0)
                     @if (session('userId'))
-                        {{-- ログイン済み：カートに入れるボタン --}}
                         <form action="{{ route('cart.store', $product->id) }}" method="POST" class="cart-form">
                             @csrf
 
@@ -65,7 +64,6 @@
                             <button type="submit" class="btn-submit">カートに入れる</button>
                         </form>
                     @else
-                        {{-- 未ログイン：ログインボタン --}}
                         <div class="cart-form">
                             <a href="{{ route('login') }}" class="btn-submit" style="display:inline-block; text-align:center; text-decoration:none;">
                                 カートに入れるためにログイン
@@ -78,5 +76,19 @@
 
     </div>
 </div>
+
+@if($product->voice_url)
+<script>
+window.addEventListener('load', function () {
+    const audio = new Audio("{{ asset($product->voice_url) }}");
+    audio.volume = 1.0;
+
+    audio.play().catch(function(error) {
+        console.log('音声の自動再生がブロックされました', error);
+    });
+});
+</script>
+@endif
+
 </body>
 </html>
