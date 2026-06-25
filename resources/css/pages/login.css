@@ -1,21 +1,33 @@
 /* resources/css/pages/login.css */
 
+/* 💡【追加】ブラウザが勝手につける外枠の余白を完全にリセットし、高さを100%にする */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
 /* ログインページ専用のスタイル（ジャングル世界観バージョン） */
 .login-page {
     min-height: 100vh;
+    width: 100%; /* 💡画面横幅いっぱいに強制 */
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
+    padding: 20px; /* スマホ等の画面端の張り付き防止余白 */
     font-family: sans-serif;
+    box-sizing: border-box;
 
-    /* 🌿こだわりのジャングル背景 */
+    /* 🌿こだわりのジャングル背景（元のパスに戻しました） */
     background-image:
         linear-gradient(rgba(20, 45, 20, 0.35), rgba(20, 45, 20, 0.55)),
         url("../../../public/images/ジャングル.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed; /* 💡スクロール時に背景が白く切れるのを防止 */
 }
 
 .login-page * {
@@ -138,7 +150,7 @@
 .login-page .btn-login:hover {
     transform: translateY(2px);
     box-shadow: 0 4px 0 #123008;
-    background: linear-gradient(#3f7d22, #1f4d13); /* hover時の色崩れを防止 */
+    background: linear-gradient(#3f7d22, #1f4d13);
 }
 
 /* リンクエリア */
@@ -158,7 +170,7 @@
     text-decoration: underline;
 }
 
-/* ゲストリンク（元のシンプルな指定も念のため残しています） */
+/* ゲストリンク */
 .login-page .guest-link {
     text-align: center;
     margin-top: 16px;
