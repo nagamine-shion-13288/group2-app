@@ -73,10 +73,11 @@ td {
 
 .col-id { width: 8%; text-align: center; }
 .col-img { width: 12%; text-align: center; }
-.col-name { width: 40%; text-align: left; }
-.col-price { width: 15%; text-align: right; }
+.col-name { width: 30%; text-align: left; }
+.col-category { width: 15%; text-align: center; }
+.col-price { width: 13%; text-align: right; }
 .col-stock { width: 10%; text-align: center; }
-.col-action { width: 15%; text-align: center; }
+.col-action { width: 12%; text-align: center; }
 
 tbody tr {
     transition: background 0.2s ease;
@@ -98,44 +99,44 @@ tbody tr:hover {
     box-sizing: border-box;
 }
 
-.btn-edit {
-    background: linear-gradient(135deg, #34495e, #2c3e50); 
-    color: #ffffff;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 600;
-    display: inline-block;
-    box-shadow: 0 2px 6px rgba(44, 62, 80, 0.2);
-    transition: all 0.3s ease;
-    white-space: nowrap;
-}
-
-.btn-edit:hover {
-    transform: translateY(-1px); 
-    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
-    opacity: 0.9;
-}
-
 .admin-actions {
     margin-bottom: 20px;
     text-align: right;
 }
 
-.btn-add {
+.btn-base {
     display: inline-block;
-    background-color: #28a745;
-    color: #ffffff;
-    text-decoration: none;
     padding: 10px 16px;
     font-size: 14px;
     font-weight: bold;
-    border-radius: 4px;
-    transition: background-color 0.15s ease-in-out;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-decoration: none;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+    white-space: nowrap;
+    box-sizing: border-box;
 }
 
-.btn-add:hover {
-    background-color: #218838;
+.btn-base:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0.9;
+}
+
+.btn-green {
+    background: #28a745;
+    color: #ffffff;
+}
+.btn-green:hover {
+    background: #218838;
+}
+
+.btn-navy {
+    background: linear-gradient(135deg, #34495e, #2c3e50);
+    color: #ffffff;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 13px;
 }

@@ -8,10 +8,33 @@
 <body>
 
 <div class="admin-box">
+    <div style="font-size: 14px; color: #7f8c8d; margin-bottom: 5px; font-weight: bold;">
+        店舗：{{ session('shopName', '未設定のショップ') }}
+    </div>
+
     <h1>商品一覧</h1>
 
-    <div class="admin-actions">
-        <a href="{{ route('admin.products.create') }}" class="btn-add">+ 新規商品を追加する</a>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+        <div class="filter-form">
+            <form action="{{ route('admin.products.index') }}" method="GET" id="search-form" style="display: flex; align-items: center; gap: 10px;">
+                <label for="category_select" style="font-size: 14px; color: #2c3e50; font-weight: bold;">カテゴリーで絞り込む：</label>
+                <select name="category_id" id="category_select" onchange="this.form.submit()" style="padding: 8px 12px; border: 1px solid #eaeded; border-radius: 6px; color: #2c3e50; font-size: 14px; background: #fff;">
+                    <option value="">すべてのカテゴリー</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ $selectedCategoryId == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+
+                
+            </form>
+        </div>
+
+        <div class="admin-actions" style="margin-bottom: 0;">
+            <a href="{{ route('admin.products.create') }}" class="btn-base btn-green">+ 新規商品を追加する</a>
+            <a href="{{ route('admin.orders.index') }}" class="btn-base btn-green" style="margin-left: 10px;">📋 注文管理一覧を見る</a>
+        </div>
     </div>
 
     @if(session('success'))
@@ -21,35 +44,41 @@
         <div class="alert-error">{{ $errors->first() }}</div>
     @endif
 
-    <table style="width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 15px; table-layout: fixed;">
+    <table>
         <thead>
             <tr>
-                <th style="width: 8%; text-align: center; background: #f8f9fa; color: #7f8c8d; font-weight: 600; text-transform: uppercase; font-size: 13px; padding: 16px; border-bottom: 2px solid #eaeded;">ID</th>
-                <th style="width: 12%; text-align: center; background: #f8f9fa; color: #7f8c8d; font-weight: 600; text-transform: uppercase; font-size: 13px; padding: 16px; border-bottom: 2px solid #eaeded;">画像</th>
-                <th style="width: 40%; text-align: left; background: #f8f9fa; color: #7f8c8d; font-weight: 600; text-transform: uppercase; font-size: 13px; padding: 16px; border-bottom: 2px solid #eaeded;">商品名</th>
-                <th style="width: 15%; text-align: right; background: #f8f9fa; color: #7f8c8d; font-weight: 600; text-transform: uppercase; font-size: 13px; padding: 16px; border-bottom: 2px solid #eaeded;">価格</th>
-                <th style="width: 10%; text-align: center; background: #f8f9fa; color: #7f8c8d; font-weight: 600; text-transform: uppercase; font-size: 13px; padding: 16px; border-bottom: 2px solid #eaeded;">在庫数</th>
-                <th style="width: 15%; text-align: center; background: #f8f9fa; color: #7f8c8d; font-weight: 600; text-transform: uppercase; font-size: 13px; padding: 16px; border-bottom: 2px solid #eaeded;">アクション</th>
+                <th class="col-id">ID</th>
+                <th class="col-img">画像</th>
+                <th class="col-name">商品名</th>
+                <th class="col-category">カテゴリー</th>
+                <th class="col-price">価格</th>
+                <th class="col-stock">在庫数</th>
+                <th class="col-action">アクション</th>
             </tr>
         </thead>
         <tbody>
             @foreach($products as $product)
             <tr>
-                <td style="width: 8%; text-align: center; padding: 16px; vertical-align: middle; border-bottom: 1px solid #eaeded; color: #2c3e50; font-size: 15px; word-wrap: break-word; overflow-wrap: break-word;">{{ $product->id }}</td>
-                <td style="width: 12%; text-align: center; padding: 16px; vertical-align: middle; border-bottom: 1px solid #eaeded; color: #2c3e50; font-size: 15px; word-wrap: break-word; overflow-wrap: break-word;">
+                <td class="col-id">{{ $product->id }}</td>
+                <td class="col-img">
                     @if($product->pictureUrl)
-                        <img src="{{ asset($product->pictureUrl) }}" class="product-img" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background: #e5e8e8; display: inline-block;">
+                        <img src="{{ asset($product->pictureUrl) }}" class="product-img">
                     @else
-                        <div class="product-img" style="width: 60px; height: 60px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background: #e5e8e8; display: inline-flex; align-items: center; justify-content: center; color: #7f8c8d; font-size: 12px; font-weight: bold; margin: 0 auto;">
+                        <div class="product-img" style="font-size: 12px; font-weight: bold; color: #7f8c8d; margin: 0 auto;">
                             なし
                         </div>
                     @endif
                 </td>
-                <td style="width: 40%; text-align: left; padding: 16px; vertical-align: middle; border-bottom: 1px solid #eaeded; color: #2c3e50; font-size: 15px; word-wrap: break-word; overflow-wrap: break-word;"><strong>{{ $product->name }}</strong></td>
-                <td style="width: 15%; text-align: right; padding: 16px; vertical-align: middle; border-bottom: 1px solid #eaeded; color: #2c3e50; font-size: 15px; word-wrap: break-word; overflow-wrap: break-word;">¥{{ number_format($product->price) }}</td>
-                <td style="width: 10%; text-align: center; padding: 16px; vertical-align: middle; border-bottom: 1px solid #eaeded; color: #2c3e50; font-size: 15px; word-wrap: break-word; overflow-wrap: break-word;">{{ $product->stock }} 個</td>
-                <td style="width: 15%; text-align: center; padding: 16px; vertical-align: middle; border-bottom: 1px solid #eaeded; color: #2c3e50; font-size: 15px; word-wrap: break-word; overflow-wrap: break-word;">
-                    <a href="{{ route('admin.products.edit', $product->id) }}" class="btn-edit">編集する</a>
+                <td class="col-name"><strong>{{ $product->name }}</strong></td>
+                <td class="col-category">
+                    <span style="background: #eef2f3; padding: 4px 8px; border-radius: 4px; font-size: 13px; font-weight: 600; color: #7f8c8d;">
+                        {{ $product->category_name ?? '未設定' }}
+                    </span>
+                </td>
+                <td class="col-price">¥{{ number_format($product->price) }}</td>
+                <td class="col-stock">{{ $product->stock }} 個</td>
+                <td class="col-action">
+                    <a href="{{ route('admin.products.edit', $product->id) }}" class="btn-base btn-navy btn-sm">編集する</a>
                 </td>
             </tr>
             @endforeach
