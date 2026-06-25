@@ -46,9 +46,19 @@ body {
 }
 
 .user-name {
-    font-size: 15px;
-    color: #333333;
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.85); /* ほんのり透ける上品な白 */
+    color: #2c3e50;                              /* 文字は少し濃いめのスタイリッシュな色 */
+    font-size: 13px;
+    font-weight: bold;
+    padding: 6px 16px;                           /* 上下と左右にほどよい余白 */
+    border-radius: 20px;                         /* カプセルみたいな綺麗な丸み */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);   /* 悪目立ちしない自然な影 */
+    border: 1px solid rgba(255, 255, 255, 0.5);  /* 輪郭をシャープに見せる薄い白枠 */
+    transition: background-color 0.2s ease;
 }
+
 
 .search-form {
     flex: 1;
@@ -56,26 +66,49 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0 40px;
-    gap: 8px;
+    gap: 0;
+    
+    /* ★ここがポイント！親のフォーム自体に黒線を引いて、全体の枠にします */
+    border: 2px solid #333333; 
+    border-radius: 25px;       /* 綺麗なカプセル型にするで（四角が良ければ 4px とかにしてな） */
+    overflow: hidden;          /* 中の要素がこの丸角からはみ出さないようにするおまじない */
+    max-width: 380px;          /* 横に広がりすぎないように制限 */
+    background-color: #333333;
+    box-sizing: border-box;
+    height: 38px;              /* 検索バー全体の高さを固定 */
 }
+
 
 .search-box {
-    width: 300px;
-    padding: 8px 12px;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
+    flex: 1;
+    height: 100%;
+    border: none !important;
+    padding: 0 15px;
+    font-size: 14px;
     background-color: #ffffff !important;
     color: #333333 !important;
+    outline: none;
 }
 
+/* 検索ボタン */
 .search-button {
     background-color: #333333;
     color: #ffffff;
-    border: none;
-    padding: 8px 16px;
+    border: none;              /* ボタン個別の枠線も消す（親の線があるから不要） */
+    height: 100%;              /* 親の高さにピッタリ合わせる */
+    padding: 0 20px;           /* ボタンの横幅（文字の左右の余白） */
     font-size: 14px;
-    border-radius: 5px;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ボタンにマウスを乗せたとき（ちょっとだけ優しくグレーにする） */
+.search-button:hover {
+    background-color: #444444;
 }
 
 .header-nav {
