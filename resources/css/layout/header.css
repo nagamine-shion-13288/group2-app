@@ -258,3 +258,13 @@ body {
 .sidebar-menu .login-link-red {
     color: red !important;
 }
+
+.header-nav a.login-link,
+.header-nav a.register-link {
+    color: red !important;
+}
+
+.sidebar-menu .login-link-red,
+.sidebar-menu .register-link-red {
+    color: red !important;
+}
