@@ -9,13 +9,11 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     
-    // 新規登録画面を表示
     public function showAccountAddForm()
     {
     return view('accountAdd');
     }
 
-    // 新規登録処理
     public function accountAdd(Request $request)
     {
         $request->validate([
@@ -26,15 +24,15 @@ class UserController extends Controller
     'user_phone' => 'required',
     'email' => 'required|email',
     ], [
-    'login_id.required' => 'ログインIDを入力してください。',
-    'login_id.unique' => 'このログインIDは既に使われています。',
-    'password.required' => 'パスワードを入力してください。',
-    'password.confirmed' => 'パスワード確認が一致しません。',
-    'name.required' => '氏名を入力してください。',
-    'address.required' => '住所を入力してください。',
-    'user_phone.required' => '電話番号を入力してください。',
-    'email.required' => 'メールアドレスを入力してください。',
-    'email.email' => '有効なメールアドレスを入力してください。',
+    'login_id.required' => 'ログインIDを入力してください',
+    'login_id.unique' => 'このログインIDは既に使われています',
+    'password.required' => 'パスワードを入力してください',
+    'password.confirmed' => 'パスワード確認が一致しません',
+    'name.required' => '氏名を入力してください',
+    'address.required' => '住所を入力してください',
+    'user_phone.required' => '電話番号を入力してください',
+    'email.required' => 'メールアドレスを入力してください',
+    'email.email' => '有効なメールアドレスを入力してください',
     ]);
 
         Account::create([
@@ -47,10 +45,9 @@ class UserController extends Controller
         ]);
 
         return redirect('/login')
-            ->with('success', 'アカウント登録が完了しました。');
+            ->with('success', 'アカウント登録が完了しました');
     }
 
-    // ログイン画面を表示
     public function showLoginForm()
     {
         return view('login');
@@ -63,8 +60,8 @@ class UserController extends Controller
     'id' => 'required',
     'password' => 'required',
     ], [
-    'id.required' => 'ログインIDを入力してください。',
-    'password.required' => 'パスワードを入力してください。',
+    'id.required' => 'ログインIDを入力してください',
+    'password.required' => 'パスワードを入力してください',
     ]);
 
         $account = Account::where('login_id', $request->id)->first();
@@ -79,11 +76,10 @@ class UserController extends Controller
         }
 
         return back()->withErrors([
-            'login' => 'IDまたはパスワードが違います。',
+            'login' => 'IDまたはパスワードが違います',
         ])->withInput();
     }
 
-    // ログアウト処理
     public function logout()
     {
         session()->forget([
@@ -94,14 +90,13 @@ class UserController extends Controller
         return redirect('/login');
     }
 
-    // アカウント管理画面を表示
     public function showAccount()
     {
         $userId = session('userId');
 
         if (!$userId) {
             return redirect('/login')
-                ->with('error', 'ログインしてください。');
+                ->with('error', 'ログインしてください');
         }
 
         $account = Account::find($userId);
@@ -109,14 +104,13 @@ class UserController extends Controller
         return view('account.account', compact('account'));
     }
 
-    // アカウント更新画面を表示
     public function showAccountUpdateForm()
     {
         $userId = session('userId');
 
         if (!$userId) {
             return redirect('/login')
-                ->with('error', 'ログインしてください。');
+                ->with('error', 'ログインしてください');
         }
 
         $account = Account::find($userId);
@@ -124,14 +118,13 @@ class UserController extends Controller
         return view('account.accountupdate', compact('account'));
     }
 
-    // アカウント情報更新処理
     public function accountUpdate(Request $request)
     {
         $userId = session('userId');
 
         if (!$userId) {
             return redirect('/login')
-                ->with('error', 'ログインしてください。');
+                ->with('error', 'ログインしてください');
         }
 
         $request->validate([
@@ -140,10 +133,10 @@ class UserController extends Controller
             'phone'    => 'required',
             'password' => 'required',
         ], [
-            'name.required'     => '氏名を入力してください。',
-            'address.required'  => '住所を入力してください。',
-            'phone.required'    => '電話番号を入力してください。',
-            'password.required' => 'パスワードを入力してください。',
+            'name.required'     => '氏名を入力してください',
+            'address.required'  => '住所を入力してください',
+            'phone.required'    => '電話番号を入力してください',
+            'password.required' => 'パスワードを入力してください',
         ]);
 
         $account = Account::find($userId);
@@ -159,6 +152,6 @@ class UserController extends Controller
         session(['userName' => $account->name]);
 
         return redirect('/account')
-            ->with('success', 'アカウント情報を更新しました。');
+            ->with('success', 'アカウント情報を更新しました');
     }
 }

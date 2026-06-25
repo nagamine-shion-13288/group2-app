@@ -11,10 +11,7 @@ use App\Models\Account;
 
 class CartController extends Controller
 {
-    /**
-     * F07: カート一覧表示
-     * カートに追加した全商品を表示する
-     */
+
     public function index(): View
     {
         $userId = session('userId');
@@ -41,10 +38,6 @@ class CartController extends Controller
         return view('cart.cart', compact('cartItems', 'totalPrice', 'user'));
     }
 
-    /**
-     * F06: カート追加
-     * 商品をカートに追加する
-     */
     public function store(Request $request, int $id): RedirectResponse
     {
     $userId = session('userId');
@@ -67,13 +60,9 @@ class CartController extends Controller
     }
 
     return redirect()->route('cart.index')
-                     ->with('success', 'カートに追加しました。');
+                     ->with('success', 'カートに追加しました');
     }
 
-    /**
-     * F08: カート削除
-     * カートから商品を削除する
-     */
     public function destroy(int $id): RedirectResponse
     {
         $userId = session('userId');
@@ -83,6 +72,6 @@ class CartController extends Controller
             ->delete();
 
         return redirect()->route('cart.index')
-                        ->with('success', '商品をカートから削除しました。');
+                        ->with('success', '商品をカートから削除しました');
     }
 }

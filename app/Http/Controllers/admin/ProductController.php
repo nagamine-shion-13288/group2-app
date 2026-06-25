@@ -53,15 +53,13 @@ class ProductController extends Controller
                     'stock'       => $request->stock,
                 ]);
 
-                // 3. 商品画像テーブル（products_img）に保存
                 if ($request->hasFile('image')) {
-                    // storage/app/public/products フォルダに保存
                     $path = $request->file('image')->store('products', 'public');
                     
                     ProductImg::create([
                         'product_id' => $product->id,
-                        'url'        => Storage::url($path), // /storage/products/xxx.jpg 形式のURL
-                        'alt'        => $request->name,      // altには一旦商品名をセット
+                        'url'        => Storage::url($path),
+                        'alt'        => $request->name, 
                     ]);
                 }
         });

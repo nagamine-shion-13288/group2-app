@@ -76,7 +76,6 @@
 </div>
 
 <script>
-// ラジオボタンの選択に応じて、手動入力欄の表示・非表示を切り替えるだけのシンプルな関数にしました
 function toggleDelivery(value) {
     document.getElementById('manual-input').style.display =
         value === 'manual' ? 'block' : 'none';
