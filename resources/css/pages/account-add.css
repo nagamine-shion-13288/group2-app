@@ -1,13 +1,24 @@
 /* resources/css/pages/account-add.css */
 
+/* 💡【追加】ブラウザが勝手につける外枠の余白を完全にリセットし、高さを100%にする */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
 /* 新規アカウント登録ページ専用のスタイル（ジャングル風デザイン） */
 .account-add-page {
     min-height: 100vh;
+    width: 100%; /* 💡画面横幅いっぱいに強制 */
     font-family: sans-serif; 
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
+    padding: 40px 20px; /* 💡縦に長いフォームなので、上下にスクロール用の余白を持たせます */
+    box-sizing: border-box;
 
     /* 💡 背景をジャングル画像と緑のグラデーションに統一 */
     background-image:
@@ -16,6 +27,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed; /* 💡画面スクロール時に背景が途切れるのを防止 */
 }
 
 .account-add-page * {
