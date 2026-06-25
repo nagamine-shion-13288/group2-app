@@ -31,11 +31,19 @@
             </form>
         </div>
 
-        <div class="admin-actions" style="margin-bottom: 0;">
-            <a href="{{ route('admin.products.create') }}" class="btn-base btn-green">+ 新規商品を追加する</a>
-            <a href="{{ route('admin.orders.index') }}" class="btn-base btn-green" style="margin-left: 10px;">📋 注文管理一覧を見る</a>
+        <div class="admin-actions" style="margin-bottom: 0; display: flex; align-items: center; gap: 20px;">
+    <a href="{{ route('admin.products.create') }}" class="btn-base btn-green">+ 新規商品を追加する</a>
+    
+    <a href="{{ route('admin.orders.index') }}" class="btn-base btn-green">📋 注文管理一覧を見る</a>
+    
+    <form action="{{ route('admin.logout') }}" method="POST" onsubmit="return confirm('ログアウトしますか？')" style="margin: 0; display: flex; align-items: center;">
+        @csrf
+        <button type="submit" class="btn-base" style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: #ffffff; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);">
+            🚪 ログアウト
+        </button>
+    </form>
+</div>
         </div>
-    </div>
 
     @if(session('success'))
         <div class="alert-success">{{ session('success') }}</div>

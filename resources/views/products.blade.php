@@ -16,10 +16,10 @@
     <div class="product-list-page">
         <main class="main-content">
             
-            <div class="marquee-container">
+            <div style="overflow:hidden; background:linear-gradient(90deg,#1a6b3a,#2d8f52,#1a6b3a); padding:10px 0;">
                 <div id="marquee-wrap" style="display:flex; white-space:nowrap;">
                     <span id="marquee-track" style="display:inline-block; font-size:14px; font-weight:bold; color:#fff;">
-                        　🎉 配送料無料キャンペーン実施中！ 🌿　&nbsp;&nbsp;&nbsp;　🐱 毎日新しい子が入荷中！ 🐶　&nbsp;&nbsp;&nbsp;　🐩 冷やし中華はじめました！ 😼　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        　🎉 1万円以上のご購入で配送料無料キャンペーン実施中！ 🌿　&nbsp;&nbsp;&nbsp;　🐱 毎日新しい子が入荷中！ 🐶　&nbsp;&nbsp;&nbsp;　🐩 冷やし中華はじめました！ 😼　&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </span>
                 </div>
             </div>
@@ -69,7 +69,7 @@
 
                     <label for="sort_select" style="margin-left: 20px;">並び順：</label>
                     <select name="sort" id="sort_select" onchange="this.form.submit()">
-                        <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>新着順</option>
+                        <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>未設定</option>
                         <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>価格の安い順</option>
                         <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>価格の高い順</option>
                     </select>

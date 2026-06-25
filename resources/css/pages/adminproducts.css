@@ -10,17 +10,19 @@ body {
     max-width: 1100px;
     margin: 0 auto;
     background: #ffffff;
-    padding: 30px;
-    border-radius: 12px; 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); 
+    padding: 35px;
+    border-radius: 16px; /* 角丸を少し滑らかにアップ */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); /* より柔らかいモダンなシャドウ */
 }
 
+/* ★見出しにグリーンのアクセントラインをジョイン！ */
 h1 {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 700;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     color: #2c3e50;
     padding-left: 15px;
+    line-height: 1.2;
 }
 
 .alert-success {
@@ -43,60 +45,66 @@ h1 {
     font-weight: bold;
 }
 
+/* ==========================================
+   テーブル（商品一覧）のモダン化
+   ========================================== */
 table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    margin-top: 15px;
+    margin-top: 20px;
     table-layout: fixed;
 }
 
 th {
-    background: #f8f9fa;
-    color: #7f8c8d;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 13px;
+    background: #f8fafb; /* ほんのり青みのある綺麗なグレーにチェンジ */
+    color: #5a6a85; /* 文字色を濃くして視認性をアップ */
+    font-weight: 700;
+    font-size: 14px;
     padding: 16px;
-    border-bottom: 2px solid #eaeded;
+    border-bottom: 2px solid #e2e8f0;
 }
 
 td {
-    padding: 16px;
+    padding: 18px 16px; /* 上下の余白を少し広げてゆとりを持たせる */
     vertical-align: middle;
-    border-bottom: 1px solid #eaeded;
+    border-bottom: 1px solid #edf2f7;
     color: #2c3e50;
     font-size: 15px;
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
 
-.col-id { width: 8%; text-align: center; }
+/* 各カラムのスタイル調整 */
+.col-id { width: 8%; text-align: center; font-weight: bold; color: #a0aec0; }
 .col-img { width: 12%; text-align: center; }
 .col-name { width: 30%; text-align: left; }
 .col-category { width: 15%; text-align: center; }
-.col-price { width: 13%; text-align: right; }
-.col-stock { width: 10%; text-align: center; }
+.col-price { width: 13%; text-align: right; font-weight: 700; color: #2c3e50; }
+.col-stock { width: 10%; text-align: center; font-weight: 600; }
 .col-action { width: 12%; text-align: center; }
 
+/* ホバー時の背景色を分かりやすく洗練された色に */
 tbody tr {
     transition: background 0.2s ease;
 }
 tbody tr:hover {
-    background: #fdfefe;
+    background: #f8fafc; /* マウスが乗った行がスッと引き立つ */
 }
 
+/* 商品画像ボックスの強化 */
 .product-img {
-    width: 60px !important; 
-    height: 60px !important;
+    width: 64px !important; 
+    height: 64px !important;
     object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 10px; /* 角丸を少し強めて今っぽく */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     background: #e5e8e8;
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    border: 1px solid #edf2f7;
 }
 
 .admin-actions {
@@ -104,39 +112,50 @@ tbody tr:hover {
     text-align: right;
 }
 
+/* ==========================================
+   ボタン類のスタイリッシュ化
+   ========================================== */
 .btn-base {
     display: inline-block;
-    padding: 10px 16px;
+    padding: 11px 20px;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 700;
     text-decoration: none;
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease-in-out;
+    border-radius: 8px; /* 丸みを今風に調整 */
+    box-shadow: 0 4px 6px rgba(40, 167, 69, 0.15);
+    transition: all 0.25s ease;
     white-space: nowrap;
     box-sizing: border-box;
 }
 
 .btn-base:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    opacity: 0.9;
+    transform: translateY(-2px); /* ホバー時に少し浮き上がらせる */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    opacity: 0.95;
 }
 
+/* 新規追加・注文管理ボタン（鮮やかなグラデーションに！） */
 .btn-green {
-    background: #28a745;
+    background: linear-gradient(135deg, #28a745, #218838);
     color: #ffffff;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
 }
 .btn-green:hover {
-    background: #218838;
+    background: linear-gradient(135deg, #218838, #1e7e34);
 }
 
+/* 編集ボタン（洗練されたダークネイビー） */
 .btn-navy {
-    background: linear-gradient(135deg, #34495e, #2c3e50);
+    background: linear-gradient(135deg, #4a5568, #2d3748);
     color: #ffffff;
+    box-shadow: 0 4px 12px rgba(45, 55, 72, 0.2);
+}
+.btn-navy:hover {
+    background: linear-gradient(135deg, #3d4654, #1a202c);
 }
 
 .btn-sm {
-    padding: 6px 12px;
+    padding: 8px 14px;
     font-size: 13px;
+    border-radius: 6px;
 }

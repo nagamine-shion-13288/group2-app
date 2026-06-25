@@ -41,6 +41,7 @@ Route::post('/admin/login',[ShopManagerController::class, 'login'])->name('shopM
 Route::get('/login/add', [UserController::class, 'showAccountAddForm'])->name('account.add');
 Route::post('/login/add', [UserController::class, 'accountAdd'])->name('account.store');
 
+Route::post('/admin/logout', [ShopManagerController::class, 'logout'])->name('admin.logout');
 Route::prefix('admin')->name('admin.')->group(function () {
     
     Route::get('orders', [AdminOrderController::class, 'index'])->name('orders.index');
