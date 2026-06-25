@@ -8,7 +8,7 @@
 <body>
 
 <div class="form-box">
-    <h1>商品データの編集</h1>
+    <h1>📝 商品データの編集 (ID: {{ $product->id }})</h1>
 
     @if($errors->any())
         <div class="alert-error">
@@ -34,15 +34,7 @@
         </div>
 
         <div class="form-group">
-            <label>現在の鳴き声（ボイス）</label>
-            @if($product->voice_url)
-                <div style="margin-bottom: 8px;">
-                    <audio src="{{ asset($product->voice_url) }}" controls></audio>
-                </div>
-            @else
-                <div style="color: #999; font-size: 13px; margin-bottom: 8px;">ボイスデータなし</div>
-            @endif
-            <label for="voice_file">ボイスをチェンジする（MP3ファイルを選択）</label>
+            <label for="voice_file">鳴き声（ボイス）をチェンジする（MP3ファイルを選択）</label>
             <input type="file" id="voice_file" name="voice_file" accept="audio/mp3, audio/mpeg">
         </div>
 

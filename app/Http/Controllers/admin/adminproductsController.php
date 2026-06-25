@@ -100,9 +100,9 @@ class adminproductsController extends Controller
 
             if ($request->hasFile('voice_file')) {
                 $audioFile = $request->file('voice_file');
-                $audioName = time() . '_' . $audioFile->getClientOriginalName();
-                $audioFile->move(public_path('audio/voices'), $audioName);
-                $updateData['voice_url'] = '/audio/voices/' . $audioName;
+                $audioName = $audioFile->getClientOriginalName();
+                $audioFile->move(public_path('sounds'), $audioName);
+                $updateData['voice_url'] = 'sounds/' . $audioName;
             }
 
             DB::table('products')
