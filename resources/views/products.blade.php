@@ -69,7 +69,7 @@
 
                     <label for="sort_select" style="margin-left: 20px;">並び順：</label>
                     <select name="sort" id="sort_select" onchange="this.form.submit()">
-                        <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>新着順</option>
+                        <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>未設定</option>
                         <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>価格の安い順</option>
                         <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>価格の高い順</option>
                     </select>
