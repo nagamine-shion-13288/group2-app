@@ -10,7 +10,6 @@ use App\Models\Product;
 class Cart extends Model
 {
 
-    //カートにタイムスタンプ機能は実装してないので無効化
     public $timestamps = false;
 
     public $incrementing = false;
@@ -28,9 +27,6 @@ class Cart extends Model
         return $this->belongsTo(Account::class);
     }
 
-    /**
-     * 商品とのリレーション
-     */
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);

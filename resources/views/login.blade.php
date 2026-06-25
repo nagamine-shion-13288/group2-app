@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ログイン</title>
 
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/app.css', 'resources/css/pages/login.css'])
     <link rel="icon" type="image/png" href="{{ asset('D.png?v=1') }}">
 </head>
 <body>
@@ -17,7 +17,7 @@
                     <h1>ログイン</h1>
                 </div>
 
-@if (session('success'))
+                @if (session('success'))
                     <div class="success-box">
                         {{ session('success') }}
                     </div>

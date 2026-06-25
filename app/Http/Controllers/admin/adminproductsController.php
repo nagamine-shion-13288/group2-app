@@ -35,13 +35,11 @@ class adminproductsController extends Controller
             $query->where('products.category_id', $selectedCategoryId);
         }
 
-        // ソート条件のジャッジ部分をアセンディング（昇順）に変更！
         if ($sort === 'price_asc') {
             $query->orderBy('products.price', 'asc');
         } elseif ($sort === 'price_desc') {
             $query->orderBy('products.price', 'desc');
         } else {
-            // ここや！元のコードが'desc'になってたのを'asc'にチェンジしたで！
             $query->orderBy('products.id', 'asc');
         }
 
@@ -126,7 +124,7 @@ class adminproductsController extends Controller
                 }
             }
 
-            return redirect()->route('admin.products.index')->with('success', '商品と画像をアップデートしました！');
+            return redirect()->route('admin.products.index')->with('success', '商品と画像をアップデートしました');
 
         } catch (\Exception $e) {
             return redirect()->back()->withErrors('更新に失敗しました：' . $e->getMessage())->withInput();
@@ -182,11 +180,11 @@ class adminproductsController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('admin.products.index')->with('success', '新しい商品を登録した！');
+            return redirect()->route('admin.products.index')->with('success', '新しい商品を登録しました');
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors('登録に失敗した：' . $e->getMessage())->withInput();
+            return redirect()->back()->withErrors('登録に失敗しました：' . $e->getMessage())->withInput();
         }
     }
 }

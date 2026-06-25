@@ -1,13 +1,10 @@
-/* resources/css/layout/header.css */
 
-/* サイト全体の基本リセット（ヘッダー基準） */
 body { 
     font-family: sans-serif; 
     margin: 0;
     padding: 0;
 }
 
-/* ヘッダー全体のスタイル */
 .site-header {
     position: fixed;
     top: 0;
@@ -62,9 +59,7 @@ body {
     transition: background-color 0.2s ease;
 }
 
-/* ==========================================
-    検索フォーム（黒線一体型デザイン）
-   ========================================== */
+
 .search-form {
     flex: 1;
     display: flex;
@@ -83,7 +78,7 @@ body {
     height: 38px;              /* 検索バー全体の高さを固定 */
 }
 
-/* 検索欄（入力ボックス） */
+
 .search-box {
     flex: 1;
     height: 100%;
@@ -116,7 +111,6 @@ body {
     background-color: #444444;
 }
 
-/* ヘッダーナビゲーション */
 .header-nav {
     display: flex;
     align-items: center;
@@ -150,9 +144,6 @@ body {
     text-decoration: underline;
 }
 
-/* ==========================================
-   ハンバーガーメニュー・サイドバー用
-   ========================================== */
 .hamburger-btn {
     position: fixed;
     top: 22px;
@@ -194,7 +185,6 @@ body {
     transform: translateY(-10px) rotate(-45deg);
 }
 
-/* サイドバー本体 */
 .sidebar-menu {
     position: fixed;
     top: 0;
@@ -206,13 +196,12 @@ body {
     transition: left 0.3s ease;
     padding-top: 80px;
     box-sizing: border-box;
-    
-    /* 💡 【修正】CSSファイルの位置からみた『正しい相対パス』で指定します */
     background-image: url('../../../public/images/header/ivy.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
+
 .sidebar-menu.open {
     left: 0;
 }
@@ -277,7 +266,6 @@ body {
     font-family: inherit;
 }
 
-/* 背景オーバーレイ */
 .menu-overlay {
     position: fixed;
     top: 0;
@@ -294,4 +282,12 @@ body {
 .menu-overlay.open {
     display: block;
     opacity: 1;
+}
+
+.header-nav a.login-link {
+    color: red !important;
+}
+
+.sidebar-menu .login-link-red {
+    color: red !important;
 }

@@ -74,6 +74,7 @@ class OrderController extends Controller
         $totalPrice = $cartItems->sum(fn($item) => $item->itemPrice * $item->quantity);
 
         try {
+
             // 💡 クロージャの外側で $orderId を受け取れるように変数を定義します
             $orderId = null;
 
@@ -82,27 +83,32 @@ class OrderController extends Controller
                 $currentDateTime = now();
 
                 // 💡 今回の注文のIDを取得
+
                 $orderId = DB::table('orders')->insertGetId([
                     'user_id'          => $userId,
                     'total_price'      => $totalPrice,
                     'shipping_address' => $address,
                     'created_at'       => $currentDateTime,
+
                     'updated_at'       => $currentDateTime,
+
                 ]);
 
                 foreach ($cartItems as $item) {
 
                     if ($item->stock < $item->quantity) {
-                        throw new \Exception($item->itemName . 'の在庫が足りまへん！');
+                        throw new \Exception($item->itemName . 'の在庫が足りません');
                     }
 
                     DB::table('order_details')->insert([
+
                         'order_id'   => $orderId,
                         'product_id' => $item->itemId,
                         'quantity'   => $item->quantity,
                         'price'      => $item->itemPrice,
                         'created_at' => $currentDateTime,
                         'updated_at' => $currentDateTime,
+
                     ]);
 
                     DB::table('products')

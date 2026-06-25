@@ -2,9 +2,10 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新規アカウント登録</title>
 
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/app.css', 'resources/css/pages/account-add.css'])
     <link rel="icon" type="image/png" href="{{ asset('D.png?v=1') }}">
 </head>
 <body>
