@@ -76,7 +76,7 @@ class ShopManagerController extends Controller
             'shopName'
         ]);
 
-        return redirect()->route('shopManager.login')
-            ->with('success', 'ログアウトしました');
+
+       return redirect()->route('shopManager.login');
     }
 }

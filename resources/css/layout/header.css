@@ -25,7 +25,8 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-left: 50px;
+    margin-left: 45px;  
+    border: none !important; 
 }
 
 .site-title {
@@ -49,13 +50,13 @@ body {
     display: inline-flex;
     align-items: center;
     background-color: rgba(255, 255, 255, 0.85); /* ほんのり透ける上品な白 */
-    color: #2c3e50;                              /* 文字は少し濃いめのスタイリッシュな色 */
+    color: #2c3e50;                              
     font-size: 13px;
     font-weight: bold;
-    padding: 6px 16px;                           /* 上下と左右にほどよい余白 */
-    border-radius: 20px;                         /* カプセルみたいな綺麗な丸み */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);   /* 悪目立ちしない自然な影 */
-    border: 1px solid rgba(255, 255, 255, 0.5);  /* 輪郭をシャープに見せる薄い白枠 */
+    padding: 6px 16px;                           
+    border-radius: 20px;                         
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); 
+    border: 1px solid rgba(255, 255, 255, 0.5); 
     transition: background-color 0.2s ease;
 }
 
@@ -145,9 +146,10 @@ body {
 }
 
 .hamburger-btn {
-    position: fixed;
-    top: 22px;
-    left: 20px;
+    position: absolute;
+    top: 50%;                 /* ★上から50%の位置へ */
+    transform: translateY(-50%); /* ★縦方向のド真ん中にピタッと合わせるマジック */
+    left: 25px;               /* 左端からの適切なディスタンス */
     z-index: 2000;
     width: 30px;
     height: 22px;
@@ -155,9 +157,10 @@ body {
     flex-direction: column;
     justify-content: space-between;
     cursor: pointer;
-    background: none;
-    border: none;
+    background: none !important; /* 背景は完全に透明！ */
+    border: none !important;     /* ★すべての線を強制デリート！ */
     padding: 0;
+    box-shadow: none !important; /* 影も消去 */
 }
 
 .hamburger-btn span {
